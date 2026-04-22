@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
+
+/* Thème — variables Tailwind v4 (CSS-first config) */
+@theme {
+  --color-cream: #f5efe4;
+  --color-ink: #2e1d10;
+  --color-coral: #c84a2a;
+  --color-sage: #7a8c5a;
+  --color-muted: #8c6f54;
+
+  --font-display: 'Crimson Pro', 'Crimson Text', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
