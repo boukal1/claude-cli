@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "deploy": "ng deploy --base-href=/claude-cli/ --no-silent"
+    "deploy": "ng build --base-href=/claude-cli/ --configuration=production && angular-cli-ghpages --dir=dist/claude-cli/browser"
   },
   "private": true,
   "packageManager": "npm@10.9.4",
