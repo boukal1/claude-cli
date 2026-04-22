@@ -9,6 +9,7 @@ export type SlideConfig =
   | ContentSlideConfig
   | PrincipleSlideConfig
   | CodeSlideConfig
+  | TerminalSlideConfig
   | DemoCueSlideConfig
   | FaqSlideConfig;
 
@@ -76,6 +77,26 @@ export interface CodeSlideConfig extends BaseSlide {
   /** highlight.js language hint (e.g. `bash`, `typescript`, `markdown`). */
   readonly language: string;
   /** Small caption below the code block. */
+  readonly caption?: string;
+}
+
+/**
+ * Windows Terminal preview — renders a chromed terminal window mock with a
+ * PowerShell prompt, the invoked command, and Claude's welcome banner. Used to
+ * show what the audience will actually see when running `claude` for the first
+ * time.
+ */
+export interface TerminalSlideConfig extends BaseSlide {
+  readonly kind: 'terminal';
+  /** Large headline above the terminal frame. */
+  readonly title: string;
+  /** Label shown in the fake window title bar (default: "Windows PowerShell"). */
+  readonly titleBar?: string;
+  /** Current working directory shown in the PowerShell prompt and welcome box. */
+  readonly cwd: string;
+  /** Command typed after the prompt (typically `claude`). */
+  readonly command: string;
+  /** Optional caption rendered below the terminal frame. */
   readonly caption?: string;
 }
 

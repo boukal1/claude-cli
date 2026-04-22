@@ -43,12 +43,25 @@ export const SLIDES: readonly SlideConfig[] = [
   {
     kind: 'code',
     label: 'Installation',
-    title: 'Une ligne, une commande.',
-    language: 'bash',
-    code: `npm install -g @anthropic-ai/claude-code
-claude   # dans n'importe quel repo`,
+    title: 'Sous Windows — deux options.',
+    language: 'powershell',
+    code: `# Option 1 — PowerShell, une ligne
+irm https://claude.ai/install.ps1 | iex
+
+# Option 2 — installeur officiel
+# Téléchargez le .exe depuis claude.ai/download`,
     caption:
-      "Première fois : un écran d'auth s'ouvre dans le navigateur. Ensuite, c'est juste `claude`.",
+      "Pas de Node.js à gérer : l'installeur natif pose le binaire `claude` directement dans votre PATH.",
+  },
+  {
+    kind: 'terminal',
+    label: 'Premier lancement',
+    title: 'Ensuite, dans votre repo.',
+    titleBar: 'Windows PowerShell',
+    cwd: 'C:\\dev\\mon-projet',
+    command: 'claude',
+    caption:
+      "Première fois : un écran d'auth s'ouvre dans le navigateur. Ensuite, c'est juste `claude` dans n'importe quel dossier.",
   },
   {
     kind: 'content',

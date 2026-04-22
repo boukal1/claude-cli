@@ -8,12 +8,14 @@ import {
   DemoCueSlideConfig,
   FaqSlideConfig,
   PrincipleSlideConfig,
+  TerminalSlideConfig,
   TitleSlideConfig,
 } from './slide-config';
 import { TitleSlideComponent } from './layouts/title-slide.component';
 import { ContentSlideComponent } from './layouts/content-slide.component';
 import { PrincipleSlideComponent } from './layouts/principle-slide.component';
 import { CodeSlideComponent } from './layouts/code-slide.component';
+import { TerminalSlideComponent } from './layouts/terminal-slide.component';
 import { DemoCueSlideComponent } from './layouts/demo-cue-slide.component';
 import { FaqSlideComponent } from './layouts/faq-slide.component';
 
@@ -30,6 +32,7 @@ import { FaqSlideComponent } from './layouts/faq-slide.component';
     ContentSlideComponent,
     PrincipleSlideComponent,
     CodeSlideComponent,
+    TerminalSlideComponent,
     DemoCueSlideComponent,
     FaqSlideComponent,
   ],
@@ -46,6 +49,9 @@ import { FaqSlideComponent } from './layouts/faq-slide.component';
       }
       @case ('code') {
         <app-code-slide [slide]="asCode(slide())" />
+      }
+      @case ('terminal') {
+        <app-terminal-slide [slide]="asTerminal(slide())" />
       }
       @case ('demo-cue') {
         <app-demo-cue-slide [slide]="asDemoCue(slide())" />
@@ -111,6 +117,9 @@ export class SlideHostComponent {
   }
   asCode(s: ReturnType<typeof this.slide>): CodeSlideConfig {
     return s as CodeSlideConfig;
+  }
+  asTerminal(s: ReturnType<typeof this.slide>): TerminalSlideConfig {
+    return s as TerminalSlideConfig;
   }
   asDemoCue(s: ReturnType<typeof this.slide>): DemoCueSlideConfig {
     return s as DemoCueSlideConfig;
