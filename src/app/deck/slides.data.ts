@@ -274,7 +274,8 @@ export const SLIDES: readonly SlideConfig[] = [
   {
     kind: 'demo-cue',
     cue: '→ Démo live',
-    speakerNote: 'Cloner claude-demo-playground — fixer le bug — ajouter le filtre par statut.',
+    repoUrl: 'github.com/boukal1/claude-demo-playground',
+    speakerNote: 'Cloner le repo — fixer le bug — ajouter le filtre par statut.',
   },
 
   // ───────────────────────── Act 5 — Meta reveal & takeaways

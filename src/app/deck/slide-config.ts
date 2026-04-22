@@ -132,6 +132,8 @@ export interface DemoCueSlideConfig extends BaseSlide {
   readonly cue: string;
   /** Optional speaker-facing note shown below, smaller. */
   readonly speakerNote?: string;
+  /** Optional repository URL shown below the cue so the audience can write it down. */
+  readonly repoUrl?: string;
 }
 
 /**
