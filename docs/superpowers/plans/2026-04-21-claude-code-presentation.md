@@ -13,6 +13,7 @@
 **Prerequisites:** Node 20.11+ or 22+, a GitHub account (user has one), Chrome available for Karma headless tests.
 
 **Language conventions:**
+
 - Audience-facing text (slide copy, READMEs, FAQ answers, seeded code comments) in French.
 - Code identifiers, CLI commands, terminal output, proper nouns (Claude Code, plan mode, CLAUDE.md) in English.
 - JSDoc on every public method, type, and class per user's global CLAUDE.md conventions.
@@ -47,6 +48,7 @@ If not authenticated: `gh auth login` — follow the interactive prompts. Ask th
 - [ ] **Step 4: Confirm working directories**
 
 Run: `ls C:/Projects/` and verify:
+
 - `C:/Projects/claude-cli/` exists (currently holds the spec; will become the deck repo)
 - `C:/Projects/claude-demo-playground/` does not yet exist (created in Phase 1)
 
@@ -61,11 +63,13 @@ We build this repo first. It is smaller, sharper in purpose, and finishing it gi
 ### Task 1.1: Scaffold Angular 21 project
 
 **Files:**
+
 - Create: `C:/Projects/claude-demo-playground/` (entire Angular scaffold)
 
 - [ ] **Step 1: Scaffold the project**
 
 Run from `C:/Projects/`:
+
 ```bash
 npx -y @angular/cli@21 new claude-demo-playground \
   --style=scss \
@@ -82,6 +86,7 @@ Expected: prompts may appear for "share analytics" (answer `N`) and "server-side
 - [ ] **Step 2: Verify the dev server starts**
 
 Run:
+
 ```bash
 cd C:/Projects/claude-demo-playground
 npm start
@@ -92,6 +97,7 @@ Expected: output includes `Local: http://localhost:4200/`, and opening that URL 
 - [ ] **Step 3: Verify the baseline tests pass**
 
 Run:
+
 ```bash
 npm test -- --watch=false
 ```
@@ -103,6 +109,7 @@ Expected: 2 default tests pass (auto-generated `app.spec.ts` — Angular 21 file
 - [ ] **Step 4: Commit the scaffold**
 
 Run:
+
 ```bash
 git -C C:/Projects/claude-demo-playground add -A
 git -C C:/Projects/claude-demo-playground commit -m "chore: initial Angular 21 scaffold"
@@ -111,12 +118,14 @@ git -C C:/Projects/claude-demo-playground commit -m "chore: initial Angular 21 s
 ### Task 1.2: Add `.gitignore` entries and editor config
 
 **Files:**
+
 - Modify: `C:/Projects/claude-demo-playground/.gitignore`
 - Create: `C:/Projects/claude-demo-playground/.editorconfig`
 
 - [ ] **Step 1: Append project-specific ignores**
 
 Append to `.gitignore` (after existing content):
+
 ```
 # local brainstorm / memory artifacts
 .superpowers/
@@ -126,6 +135,7 @@ memory/
 - [ ] **Step 2: Create `.editorconfig`**
 
 Write `C:/Projects/claude-demo-playground/.editorconfig`:
+
 ```ini
 root = true
 
@@ -151,6 +161,7 @@ git -C C:/Projects/claude-demo-playground commit -m "chore: add .editorconfig an
 ### Task 1.3: Extend Prettier config
 
 **Files:**
+
 - Modify: `C:/Projects/claude-demo-playground/.prettierrc` (created by scaffold)
 - Create: `C:/Projects/claude-demo-playground/.prettierignore`
 - Modify: `C:/Projects/claude-demo-playground/package.json` (add format scripts)
@@ -160,6 +171,7 @@ git -C C:/Projects/claude-demo-playground commit -m "chore: add .editorconfig an
 - [ ] **Step 1: Replace `.prettierrc` with the richer config**
 
 The scaffold's `.prettierrc` only sets `printWidth`, `singleQuote`, and an HTML parser override. Replace with:
+
 ```json
 {
   "printWidth": 100,
@@ -190,6 +202,7 @@ coverage/
 - [ ] **Step 3: Add Prettier npm scripts**
 
 Modify `package.json` — inside `"scripts"`, add:
+
 ```json
 "format": "prettier --write .",
 "format:check": "prettier --check ."
@@ -213,6 +226,7 @@ git commit -m "chore: extend Prettier config and add format scripts"
 ### Task 1.4: Add ESLint (for `ng lint`)
 
 **Files:**
+
 - Create/modify: `eslint.config.js` (created by schematic)
 - Modify: `package.json`
 
@@ -221,6 +235,7 @@ Angular 21 ships without a default linter. The CI workflow will call `ng lint`, 
 - [ ] **Step 1: Add `@angular-eslint` via schematic**
 
 Run from repo root:
+
 ```bash
 npx -y @angular/cli@21 add @angular-eslint/schematics --skip-confirmation
 ```
@@ -245,11 +260,13 @@ git commit -m "chore: add @angular-eslint for ng lint"
 ### Task 1.5: Create the `Mission` model
 
 **Files:**
+
 - Create: `src/app/mission.model.ts`
 
 - [ ] **Step 1: Write the model file**
 
 `src/app/mission.model.ts`:
+
 ```ts
 /**
  * Statut d'avancement d'une mission.
@@ -283,12 +300,14 @@ git commit -m "feat: add Mission model"
 ### Task 1.6: `MissionService` — write the failing test first (TDD)
 
 **Files:**
+
 - Create: `src/app/mission.service.spec.ts`
 - Create: `src/app/mission.service.ts` (stub in this task — bug implementation in the next)
 
 - [ ] **Step 1: Write the failing test**
 
 `src/app/mission.service.spec.ts`:
+
 ```ts
 import { TestBed } from '@angular/core/testing';
 import { MissionService } from './mission.service';
@@ -336,6 +355,7 @@ describe('MissionService', () => {
 - [ ] **Step 2: Stub the service so the file compiles but tests fail**
 
 `src/app/mission.service.ts`:
+
 ```ts
 import { Injectable, signal } from '@angular/core';
 import { Mission } from './mission.model';
@@ -350,7 +370,7 @@ import { Mission } from './mission.model';
 @Injectable({ providedIn: 'root' })
 export class MissionService {
   private readonly _missions = signal<Mission[]>([
-    { id: 'm-1', title: 'Refactor le pipeline d\'authentification', status: 'active' },
+    { id: 'm-1', title: "Refactor le pipeline d'authentification", status: 'active' },
     { id: 'm-2', title: 'Écrire le rapport trimestriel', status: 'active' },
     { id: 'm-3', title: 'Mettre à jour la documentation API', status: 'done' },
     { id: 'm-4', title: 'Préparer la démo client', status: 'active' },
@@ -392,6 +412,7 @@ git commit -m "test: add MissionService specs (failing)"
 ### Task 1.7: `MissionService` — implement the seeded-bug version
 
 **Files:**
+
 - Modify: `src/app/mission.service.ts`
 
 This implementation intentionally contains the seeded bug: it mutates the mission object in place instead of returning a new array. The test `toggleComplete should flip the status` **will still pass** because it reads the same mutated reference, but the immutability test **will fail** — and during the live demo, the UI won't update under `OnPush`.
@@ -399,6 +420,7 @@ This implementation intentionally contains the seeded bug: it mutates the missio
 - [ ] **Step 1: Replace `toggleComplete` with the buggy implementation**
 
 In `src/app/mission.service.ts`, replace the `toggleComplete` method body:
+
 ```ts
   /**
    * Bascule le statut de la mission identifiée par {@code id}.
@@ -419,6 +441,7 @@ In `src/app/mission.service.ts`, replace the `toggleComplete` method body:
 ```
 
 Add the `MissionStatus` import at the top if missing:
+
 ```ts
 import { Mission, MissionStatus } from './mission.model';
 ```
@@ -430,6 +453,7 @@ npm test -- --watch=false --browsers=ChromeHeadless
 ```
 
 Expected:
+
 - ✅ "should start with a non-empty list of missions"
 - ✅ "toggleComplete should flip the status on the matching mission"
 - ❌ "toggleComplete should return a new array reference (immutability)" — fails because `this._missions.set(list)` sets the same array reference
@@ -447,6 +471,7 @@ git commit -m "feat(seed): MissionService.toggleComplete mutates in place (demo 
 ### Task 1.8: `App` component — list UI with the TODO
 
 **Files:**
+
 - Modify: `src/app/app.ts` (the root component — Angular 21 names it `App`, file drops `.component`)
 - Modify: `src/app/app.html`
 - Modify: `src/app/app.scss`
@@ -499,16 +524,12 @@ export class App {
 
   <ul class="missions">
     @for (mission of missions(); track mission.id) {
-      <li class="mission" [class.mission--done]="mission.status === 'done'">
-        <span class="mission__title">{{ mission.title }}</span>
-        <button type="button" class="mission__toggle" (click)="onToggle(mission.id)">
-          @if (mission.status === 'done') {
-            Rouvrir
-          } @else {
-            Marquer terminée
-          }
-        </button>
-      </li>
+    <li class="mission" [class.mission--done]="mission.status === 'done'">
+      <span class="mission__title">{{ mission.title }}</span>
+      <button type="button" class="mission__toggle" (click)="onToggle(mission.id)">
+        @if (mission.status === 'done') { Rouvrir } @else { Marquer terminée }
+      </button>
+    </li>
     }
   </ul>
 </main>
@@ -519,7 +540,12 @@ export class App {
 ```scss
 :host {
   display: block;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
   color: #1f2937;
   background: #f9fafb;
   min-height: 100vh;
@@ -578,13 +604,16 @@ h1 {
   font: inherit;
   font-size: 0.875rem;
 
-  &:hover { background: #eff6ff; }
+  &:hover {
+    background: #eff6ff;
+  }
 }
 ```
 
 - [ ] **Step 4: Update the auto-generated `app.spec.ts`**
 
 Replace with:
+
 ```ts
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
@@ -636,11 +665,13 @@ git commit -m "feat: render mission list and wire toggle button"
 ### Task 1.9: Seed `CLAUDE.md`
 
 **Files:**
+
 - Create: `CLAUDE.md`
 
 - [ ] **Step 1: Write the file**
 
 `CLAUDE.md`:
+
 ```markdown
 # Carnet de missions — conventions
 
@@ -661,11 +692,13 @@ git commit -m "docs: seed CLAUDE.md with project conventions"
 ### Task 1.10: CI workflow
 
 **Files:**
+
 - Create: `.github/workflows/ci.yml`
 
 - [ ] **Step 1: Write the workflow**
 
 `.github/workflows/ci.yml`:
+
 ```yaml
 name: ci
 
@@ -707,11 +740,12 @@ git commit -m "ci: run lint, tests, and format check on push and PR"
 ### Task 1.11: README with CI badge
 
 **Files:**
+
 - Modify: `README.md`
 
 - [ ] **Step 1: Replace `README.md` content (keep this file in French)**
 
-```markdown
+````markdown
 # Carnet de missions
 
 ![CI](https://github.com/<GITHUB_USERNAME>/claude-demo-playground/actions/workflows/ci.yml/badge.svg)
@@ -736,11 +770,13 @@ npm test -- --watch=false --browsers=ChromeHeadless
 npm run lint
 npm run format
 ```
+````
 
 ## Stack
 
 Angular 21, standalone components, signals, zoneless. Jasmine + Karma pour les tests. GitHub Actions pour le CI.
-```
+
+````
 
 - [ ] **Step 2: Replace `<GITHUB_USERNAME>`**
 
@@ -751,7 +787,7 @@ Ask the user for their GitHub username, then replace the placeholder in the READ
 ```bash
 git add README.md
 git commit -m "docs: README with scenario description and CI badge"
-```
+````
 
 ### Task 1.12: Create remote repo and push
 
@@ -791,6 +827,7 @@ Phase 1 done. Demo repo is online, CI is red on purpose, the bug and TODO are se
 ### Task 2.1: Scaffold Angular 21 project at the repo root
 
 **Files:**
+
 - Move: `C:/Projects/claude-cli/docs/` and `.superpowers/` temporarily
 - Create: Angular 21 scaffold at `C:/Projects/claude-cli/`
 - Restore: the moved folders
@@ -837,6 +874,7 @@ rmdir /c/Projects/claude-cli-temp
 - [ ] **Step 4: Add ignores for non-committed folders**
 
 Append to `/c/Projects/claude-cli/.gitignore`:
+
 ```
 # local brainstorm / memory artifacts
 .superpowers/
@@ -866,6 +904,7 @@ git -C /c/Projects/claude-cli commit --amend -m "chore: initial Angular 21 scaff
 ### Task 2.2: Install Tailwind CSS v4
 
 **Files:**
+
 - Create: `postcss.config.json`
 - Modify: `src/styles.scss` (or rename; see below)
 - Modify: `package.json`
@@ -892,7 +931,7 @@ npm install --save-dev --save-exact tailwindcss@4 @tailwindcss/postcss@4 postcss
 - [ ] **Step 3: Replace `src/styles.scss` content**
 
 ```scss
-@use 'tailwindcss';
+@import 'tailwindcss';
 
 /* Thème — variables Tailwind v4 (CSS-first config) */
 @theme {
@@ -907,7 +946,8 @@ npm install --save-dev --save-exact tailwindcss@4 @tailwindcss/postcss@4 postcss
   --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   background: var(--color-cream);
@@ -936,11 +976,13 @@ git commit -m "feat: install Tailwind v4 and define theme tokens"
 ### Task 2.3: Load Google Fonts
 
 **Files:**
+
 - Modify: `src/index.html`
 
 - [ ] **Step 1: Add font links to `<head>`**
 
 In `src/index.html`, inside `<head>` before the closing tag:
+
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -961,25 +1003,33 @@ git add src/index.html
 git commit -m "feat: load Crimson Pro, Inter, and JetBrains Mono"
 ```
 
-### Task 2.4: Install remaining deck dependencies
+### Task 2.4: Install remaining deck dependencies + Prettier scripts + ESLint
 
 **Files:**
+
 - Modify: `package.json`
+- Create: `.prettierignore`
+- Modify: `.prettierrc` (extend scaffold default with the same richer ruleset as the demo repo)
+- Create: `.gitattributes` (LF line endings)
+
+Three independent sub-tasks bundled into a single logical commit (or a short sequence of small commits at the implementer's discretion).
 
 - [ ] **Step 1: Install `ngx-highlightjs` (with Angular 21-compatible release) and `angular-cli-ghpages`**
 
 ```bash
-cd C:/Projects/claude-cli
+cd /c/Projects/claude-cli
 npm install ngx-highlightjs@latest
 npm install --save-dev angular-cli-ghpages@latest
 ```
 
 **Fallback if `ngx-highlightjs` has no Angular 21-compatible release at install time:** use Prism instead:
+
 ```bash
 npm uninstall ngx-highlightjs
 npm install prismjs
 npm install --save-dev @types/prismjs
 ```
+
 And adapt the `CodeSlide` implementation in Task 4.4 accordingly — code shape is equivalent.
 
 - [ ] **Step 2: Install ESLint schematic (same as demo repo)**
@@ -989,12 +1039,76 @@ npx -y @angular/cli@21 add @angular-eslint/schematics --skip-confirmation
 npm run lint
 ```
 
-- [ ] **Step 3: Commit**
+Expected: schematic installs `@eslint/js`, `angular-eslint`, `eslint`, `typescript-eslint`, writes `eslint.config.js`, adds a `lint` target to `angular.json`, and adds `"lint": "ng lint"` to `package.json` scripts. `npm run lint` then prints `All files pass linting.`
+
+- [ ] **Step 3: Extend Prettier config + scripts (mirror the demo repo)**
+
+Replace `/c/Projects/claude-cli/.prettierrc` content with:
+
+```json
+{
+  "printWidth": 100,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "semi": true,
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "htmlWhitespaceSensitivity": "strict",
+  "endOfLine": "lf",
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": { "parser": "angular" }
+    }
+  ]
+}
+```
+
+Create `/c/Projects/claude-cli/.prettierignore`:
+
+```
+dist/
+node_modules/
+coverage/
+.angular/
+```
+
+Create `/c/Projects/claude-cli/.gitattributes`:
+
+```
+# Force LF line endings on checkout across platforms.
+# Avoids CRLF/LF churn that would otherwise break `prettier --check` on CI
+# when developers work from both Windows and macOS/Linux.
+* text=auto eol=lf
+
+# Keep binary assets untouched.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+```
+
+Add `format` and `format:check` npm scripts to `package.json` (preserve all existing scripts — at minimum `ng`, `start`, `build`, `watch`, `test`, `lint`):
+
+```json
+"format": "prettier --write .",
+"format:check": "prettier --check ."
+```
+
+Run `npm run format` once to normalize anything scaffold-written. Verify `npm run format:check`, `npm run lint`, and `npm test -- --watch=false` all pass.
+
+- [ ] **Step 4: Commit**
 
 ```bash
+cd /c/Projects/claude-cli
 git add -A
-git commit -m "chore: add highlight.js, gh-pages deploy, and ESLint tooling"
+git commit -m "chore: add highlight.js, gh-pages deploy, ESLint, and Prettier scripts"
 ```
+
+The `-A` captures eslint.config.js, angular.json updates, package.json updates, .prettierrc, .prettierignore, .gitattributes, and any files Prettier reformatted in one go.
 
 ---
 
@@ -1003,6 +1117,7 @@ git commit -m "chore: add highlight.js, gh-pages deploy, and ESLint tooling"
 ### Task 3.1: `SlideConfig` types
 
 **Files:**
+
 - Create: `src/app/deck/slide-config.ts`
 
 - [ ] **Step 1: Write the type file**
@@ -1099,12 +1214,14 @@ git commit -m "feat: SlideConfig discriminated union"
 ### Task 3.2: `DeckService` — tests first
 
 **Files:**
+
 - Create: `src/app/deck/deck.service.spec.ts`
 - Create: `src/app/deck/deck.service.ts` (stub)
 
 - [ ] **Step 1: Write the spec**
 
 `src/app/deck/deck.service.spec.ts`:
+
 ```ts
 import { TestBed } from '@angular/core/testing';
 import { DeckService, DECK_SLIDES } from './deck.service';
@@ -1180,6 +1297,7 @@ describe('DeckService', () => {
 - [ ] **Step 2: Write the service stub so the file compiles**
 
 `src/app/deck/deck.service.ts`:
+
 ```ts
 import { computed, inject, Injectable, InjectionToken, signal } from '@angular/core';
 import { SlideConfig } from './slide-config';
@@ -1288,12 +1406,14 @@ git commit -m "feat: DeckService with signal-based navigation state"
 ### Task 3.3: Wire `DECK_SLIDES` provider with a small placeholder
 
 **Files:**
+
 - Create: `src/app/deck/slides.data.ts` (placeholder — real content in Task 5.1)
 - Modify: `src/app/app.config.ts`
 
 - [ ] **Step 1: Create a minimal `slides.data.ts`**
 
 `src/app/deck/slides.data.ts`:
+
 ```ts
 import { SlideConfig } from './slide-config';
 
@@ -1303,7 +1423,7 @@ import { SlideConfig } from './slide-config';
  * content is authored.
  */
 export const SLIDES: readonly SlideConfig[] = [
-  { kind: 'title', title: 'Claude Code' , subtitle: 'Ce CLI que tout le monde devrait essayer' },
+  { kind: 'title', title: 'Claude Code', subtitle: 'Ce CLI que tout le monde devrait essayer' },
   {
     kind: 'content',
     title: 'Placeholder — contenu à venir',
@@ -1315,6 +1435,7 @@ export const SLIDES: readonly SlideConfig[] = [
 - [ ] **Step 2: Register the provider in `app.config.ts`**
 
 `src/app/app.config.ts` (add to the `providers` array):
+
 ```ts
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
@@ -1343,12 +1464,14 @@ git commit -m "feat: wire SLIDES into DeckService via DECK_SLIDES token"
 ### Task 3.4: Routing + `SlideHostComponent`
 
 **Files:**
+
 - Create: `src/app/deck/slide-host.component.ts`
 - Modify: `src/app/app.routes.ts`
 
 - [ ] **Step 1: Create `SlideHostComponent`**
 
 `src/app/deck/slide-host.component.ts`:
+
 ```ts
 import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -1365,15 +1488,34 @@ import { DeckService } from './deck.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @switch (slide()?.kind) {
-      @case ('title') { <p>TODO: TitleSlide — Task 4.1</p> }
-      @case ('content') { <p>TODO: ContentSlide — Task 4.2</p> }
-      @case ('principle') { <p>TODO: PrincipleSlide — Task 4.3</p> }
-      @case ('code') { <p>TODO: CodeSlide — Task 4.4</p> }
-      @case ('demo-cue') { <p>TODO: DemoCueSlide — Task 4.5</p> }
-      @case ('faq') { <p>TODO: FaqSlide — Task 4.6</p> }
+      @case ('title') {
+        <p>TODO: TitleSlide — Task 4.1</p>
+      }
+      @case ('content') {
+        <p>TODO: ContentSlide — Task 4.2</p>
+      }
+      @case ('principle') {
+        <p>TODO: PrincipleSlide — Task 4.3</p>
+      }
+      @case ('code') {
+        <p>TODO: CodeSlide — Task 4.4</p>
+      }
+      @case ('demo-cue') {
+        <p>TODO: DemoCueSlide — Task 4.5</p>
+      }
+      @case ('faq') {
+        <p>TODO: FaqSlide — Task 4.6</p>
+      }
     }
   `,
-  styles: [`:host { display: block; padding: 4rem; }`],
+  styles: [
+    `
+      :host {
+        display: block;
+        padding: 4rem;
+      }
+    `,
+  ],
 })
 export class SlideHostComponent {
   private readonly route = inject(ActivatedRoute);
@@ -1414,6 +1556,7 @@ export class SlideHostComponent {
 - [ ] **Step 2: Update `app.routes.ts`**
 
 `src/app/app.routes.ts`:
+
 ```ts
 import { Routes } from '@angular/router';
 import { SlideHostComponent } from './deck/slide-host.component';
@@ -1428,11 +1571,13 @@ export const routes: Routes = [
 - [ ] **Step 3: Point `app.component.html` at the router outlet**
 
 Replace `src/app/app.component.html` with:
+
 ```html
 <router-outlet />
 ```
 
 Ensure `src/app/app.component.ts` imports `RouterOutlet`:
+
 ```ts
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
@@ -1448,6 +1593,7 @@ export class AppComponent {}
 ```
 
 Update `src/app/app.component.spec.ts` accordingly — remove any content checks that depended on the scaffolded template; keep a minimal compilation test:
+
 ```ts
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
@@ -1459,10 +1605,7 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      providers: [
-        provideRouter([]),
-        { provide: DECK_SLIDES, useValue: SLIDES },
-      ],
+      providers: [provideRouter([]), { provide: DECK_SLIDES, useValue: SLIDES }],
     }).compileComponents();
   });
 
@@ -1492,11 +1635,13 @@ git commit -m "feat: route-driven SlideHostComponent syncing with DeckService"
 ### Task 3.5: Keyboard navigation on `AppComponent`
 
 **Files:**
+
 - Modify: `src/app/app.component.ts`
 
 - [ ] **Step 1: Add a `@HostListener` for key navigation**
 
 Replace `src/app/app.component.ts`:
+
 ```ts
 import { ChangeDetectionStrategy, Component, HostListener, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
@@ -1527,7 +1672,10 @@ export class AppComponent {
   @HostListener('window:keydown', ['$event'])
   onKeydown(event: KeyboardEvent): void {
     const target = event.target as HTMLElement | null;
-    if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
+    if (
+      target &&
+      (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)
+    ) {
       return;
     }
 
@@ -1617,6 +1765,7 @@ git commit -m "feat: keyboard navigation and shortcut overlay trigger"
 ### Task 3.6: `ProgressBar`, `KeyHint`, and shortcuts overlay components
 
 **Files:**
+
 - Create: `src/app/shared/progress-bar.component.ts`
 - Create: `src/app/shared/key-hint.component.ts`
 - Create: `src/app/shared/shortcuts-overlay.component.ts`
@@ -1633,16 +1782,24 @@ import { DeckService } from '../deck/deck.service';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `<div class="bar" [style.width.%]="percent()"></div>`,
-  styles: [`
-    :host {
-      position: fixed; top: 0; left: 0; right: 0; height: 3px;
-      background: rgba(46, 29, 16, 0.08); z-index: 50;
-    }
-    .bar {
-      height: 100%; background: var(--color-coral);
-      transition: width 250ms ease;
-    }
-  `],
+  styles: [
+    `
+      :host {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: rgba(46, 29, 16, 0.08);
+        z-index: 50;
+      }
+      .bar {
+        height: 100%;
+        background: var(--color-coral);
+        transition: width 250ms ease;
+      }
+    `,
+  ],
 })
 export class ProgressBarComponent {
   private readonly deck = inject(DeckService);
@@ -1671,15 +1828,26 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     <span class="dot">•</span>
     <span>? pour l'aide</span>
   `,
-  styles: [`
-    :host {
-      position: fixed; bottom: 1rem; right: 1.25rem; z-index: 40;
-      font-family: var(--font-sans); font-size: 0.75rem;
-      color: var(--color-muted); letter-spacing: 0.05em;
-      display: flex; gap: 0.45rem; align-items: center;
-    }
-    .dot { opacity: 0.5; }
-  `],
+  styles: [
+    `
+      :host {
+        position: fixed;
+        bottom: 1rem;
+        right: 1.25rem;
+        z-index: 40;
+        font-family: var(--font-sans);
+        font-size: 0.75rem;
+        color: var(--color-muted);
+        letter-spacing: 0.05em;
+        display: flex;
+        gap: 0.45rem;
+        align-items: center;
+      }
+      .dot {
+        opacity: 0.5;
+      }
+    `,
+  ],
 })
 export class KeyHintComponent {}
 ```
@@ -1699,41 +1867,60 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
       <div class="panel" role="dialog" aria-labelledby="sc-title">
         <h2 id="sc-title">Raccourcis</h2>
         <dl>
-          <dt>← / →</dt><dd>Slide précédente / suivante</dd>
-          <dt>Espace / PageDown</dt><dd>Slide suivante</dd>
-          <dt>Home / End</dt><dd>Première / dernière slide</dd>
-          <dt>F</dt><dd>Plein écran</dd>
-          <dt>Q puis 1–4</dt><dd>Sauter vers une FAQ</dd>
-          <dt>?</dt><dd>Afficher / cacher cette aide</dd>
-          <dt>Échap</dt><dd>Sortir du plein écran / fermer</dd>
+          <dt>← / →</dt><dd>Slide précédente / suivante</dd> <dt>Espace / PageDown</dt
+          ><dd>Slide suivante</dd> <dt>Home / End</dt><dd>Première / dernière slide</dd> <dt>F</dt
+          ><dd>Plein écran</dd> <dt>Q puis 1–4</dt><dd>Sauter vers une FAQ</dd> <dt>?</dt
+          ><dd>Afficher / cacher cette aide</dd> <dt>Échap</dt
+          ><dd>Sortir du plein écran / fermer</dd>
         </dl>
       </div>
     }
   `,
-  styles: [`
-    .backdrop {
-      position: fixed; inset: 0; background: rgba(46, 29, 16, 0.45);
-      z-index: 60;
-    }
-    .panel {
-      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      background: var(--color-cream); color: var(--color-ink);
-      padding: 2rem 2.25rem; border-radius: 8px; z-index: 61;
-      min-width: 420px; max-width: 90vw;
-      box-shadow: 0 20px 40px rgba(46,29,16,0.25);
-      font-family: var(--font-sans);
-    }
-    h2 {
-      font-family: var(--font-display); font-weight: 500;
-      font-size: 1.5rem; margin: 0 0 1.25rem 0;
-    }
-    dl {
-      display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1.5rem;
-      margin: 0; font-size: 0.9rem;
-    }
-    dt { font-weight: 600; color: var(--color-coral); }
-    dd { margin: 0; }
-  `],
+  styles: [
+    `
+      .backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(46, 29, 16, 0.45);
+        z-index: 60;
+      }
+      .panel {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--color-cream);
+        color: var(--color-ink);
+        padding: 2rem 2.25rem;
+        border-radius: 8px;
+        z-index: 61;
+        min-width: 420px;
+        max-width: 90vw;
+        box-shadow: 0 20px 40px rgba(46, 29, 16, 0.25);
+        font-family: var(--font-sans);
+      }
+      h2 {
+        font-family: var(--font-display);
+        font-weight: 500;
+        font-size: 1.5rem;
+        margin: 0 0 1.25rem 0;
+      }
+      dl {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.5rem 1.5rem;
+        margin: 0;
+        font-size: 0.9rem;
+      }
+      dt {
+        font-weight: 600;
+        color: var(--color-coral);
+      }
+      dd {
+        margin: 0;
+      }
+    `,
+  ],
 })
 export class ShortcutsOverlayComponent {
   readonly visible = input.required<boolean>();
@@ -1744,6 +1931,7 @@ export class ShortcutsOverlayComponent {
 - [ ] **Step 4: Mount the three components on `AppComponent`**
 
 Update `src/app/app.component.ts` imports:
+
 ```ts
 import { RouterOutlet } from '@angular/router';
 import { ProgressBarComponent } from './shared/progress-bar.component';
@@ -1760,6 +1948,7 @@ import { ShortcutsOverlayComponent } from './shared/shortcuts-overlay.component'
 ```
 
 Update `src/app/app.component.html`:
+
 ```html
 <app-progress-bar />
 <router-outlet />
@@ -1787,12 +1976,14 @@ All six layouts follow the same pattern: standalone component, `OnPush`, one `in
 ### Task 4.1: `TitleSlide`
 
 **Files:**
+
 - Create: `src/app/deck/layouts/title-slide.component.ts`
 - Modify: `src/app/deck/slide-host.component.ts`
 
 - [ ] **Step 1: Write the component**
 
 `src/app/deck/layouts/title-slide.component.ts`:
+
 ```ts
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { TitleSlideConfig } from '../slide-config';
@@ -1812,34 +2003,36 @@ import { TitleSlideConfig } from '../slide-config';
       }
     </section>
   `,
-  styles: [`
-    .label {
-      font-family: var(--font-sans);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      color: var(--color-muted);
-      margin-bottom: 1.25rem;
-      font-weight: 500;
-    }
-    .title {
-      font-family: var(--font-display);
-      font-weight: 500;
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      color: var(--color-ink);
-      margin: 0;
-    }
-    .subtitle {
-      font-family: var(--font-sans);
-      font-size: clamp(1.125rem, 1.75vw, 1.5rem);
-      color: var(--color-muted);
-      margin-top: 1.5rem;
-      max-width: 48ch;
-      line-height: 1.4;
-    }
-  `],
+  styles: [
+    `
+      .label {
+        font-family: var(--font-sans);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--color-muted);
+        margin-bottom: 1.25rem;
+        font-weight: 500;
+      }
+      .title {
+        font-family: var(--font-display);
+        font-weight: 500;
+        font-size: clamp(3rem, 7vw, 5.5rem);
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        color: var(--color-ink);
+        margin: 0;
+      }
+      .subtitle {
+        font-family: var(--font-sans);
+        font-size: clamp(1.125rem, 1.75vw, 1.5rem);
+        color: var(--color-muted);
+        margin-top: 1.5rem;
+        max-width: 48ch;
+        line-height: 1.4;
+      }
+    `,
+  ],
 })
 export class TitleSlideComponent {
   readonly slide = input.required<TitleSlideConfig>();
@@ -1849,6 +2042,7 @@ export class TitleSlideComponent {
 - [ ] **Step 2: Wire into `SlideHostComponent`**
 
 In `slide-host.component.ts`, add to imports and template:
+
 ```ts
 import { TitleSlideComponent } from './layouts/title-slide.component';
 
@@ -1859,6 +2053,7 @@ import { TitleSlideComponent } from './layouts/title-slide.component';
 ```
 
 Replace the `@case ('title')` template branch:
+
 ```html
 @case ('title') { <app-title-slide [slide]="$any(slide())" /> }
 ```
@@ -1877,12 +2072,14 @@ git commit -m "feat: TitleSlide layout"
 ### Task 4.2: `ContentSlide`
 
 **Files:**
+
 - Create: `src/app/deck/layouts/content-slide.component.ts`
 - Modify: `src/app/deck/slide-host.component.ts`
 
 - [ ] **Step 1: Write the component**
 
 `src/app/deck/layouts/content-slide.component.ts`:
+
 ```ts
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ContentSlideConfig } from '../slide-config';
@@ -1904,30 +2101,48 @@ import { ContentSlideConfig } from '../slide-config';
       </ul>
     </section>
   `,
-  styles: [`
-    .label {
-      font-family: var(--font-sans); font-size: 0.7rem;
-      text-transform: uppercase; letter-spacing: 0.22em;
-      color: var(--color-muted); margin-bottom: 1rem; font-weight: 500;
-    }
-    .title {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3rem); font-weight: 500;
-      letter-spacing: -0.015em; line-height: 1.1; margin: 0 0 2rem 0;
-    }
-    .bullets {
-      list-style: none; padding: 0; margin: 0;
-      display: flex; flex-direction: column; gap: 1rem;
-      font-family: var(--font-sans); font-size: clamp(1rem, 1.5vw, 1.25rem);
-      line-height: 1.5;
-    }
-    .bullets li {
-      padding-left: 1.5rem; position: relative;
-    }
-    .bullets li::before {
-      content: '—'; position: absolute; left: 0; color: var(--color-coral);
-    }
-  `],
+  styles: [
+    `
+      .label {
+        font-family: var(--font-sans);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--color-muted);
+        margin-bottom: 1rem;
+        font-weight: 500;
+      }
+      .title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 500;
+        letter-spacing: -0.015em;
+        line-height: 1.1;
+        margin: 0 0 2rem 0;
+      }
+      .bullets {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        font-family: var(--font-sans);
+        font-size: clamp(1rem, 1.5vw, 1.25rem);
+        line-height: 1.5;
+      }
+      .bullets li {
+        padding-left: 1.5rem;
+        position: relative;
+      }
+      .bullets li::before {
+        content: '—';
+        position: absolute;
+        left: 0;
+        color: var(--color-coral);
+      }
+    `,
+  ],
 })
 export class ContentSlideComponent {
   readonly slide = input.required<ContentSlideConfig>();
@@ -1937,6 +2152,7 @@ export class ContentSlideComponent {
 - [ ] **Step 2: Wire into `SlideHostComponent`**
 
 Add to imports and replace the `@case ('content')` branch:
+
 ```html
 @case ('content') { <app-content-slide [slide]="$any(slide())" /> }
 ```
@@ -1951,12 +2167,14 @@ git commit -m "feat: ContentSlide layout"
 ### Task 4.3: `PrincipleSlide` (the ❌/✅ slide)
 
 **Files:**
+
 - Create: `src/app/deck/layouts/principle-slide.component.ts`
 - Modify: `src/app/deck/slide-host.component.ts`
 
 - [ ] **Step 1: Write the component**
 
 `src/app/deck/layouts/principle-slide.component.ts`:
+
 ```ts
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { PrincipleSlideConfig } from '../slide-config';
@@ -1986,36 +2204,64 @@ import { PrincipleSlideConfig } from '../slide-config';
       }
     </section>
   `,
-  styles: [`
-    .label {
-      font-family: var(--font-sans); font-size: 0.7rem;
-      text-transform: uppercase; letter-spacing: 0.22em;
-      color: var(--color-muted); margin-bottom: 1rem; font-weight: 500;
-    }
-    .title {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3rem); font-weight: 500;
-      letter-spacing: -0.015em; line-height: 1.1; margin: 0 0 2rem 0;
-    }
-    .pair { display: flex; flex-direction: column; gap: 1rem; }
-    .example {
-      display: flex; gap: 0.9rem; align-items: baseline;
-      padding: 0.9rem 1.1rem;
-      font-family: var(--font-sans); font-size: clamp(0.95rem, 1.35vw, 1.1rem);
-      line-height: 1.5;
-    }
-    .example.bad { border-left: 3px solid var(--color-coral); }
-    .example.good { border-left: 3px solid var(--color-sage); }
-    .mark {
-      font-weight: 700; font-family: var(--font-mono);
-    }
-    .bad .mark { color: var(--color-coral); }
-    .good .mark { color: var(--color-sage); }
-    .takeaway {
-      margin-top: 2rem; font-family: var(--font-sans);
-      font-style: italic; color: var(--color-muted); max-width: 58ch;
-    }
-  `],
+  styles: [
+    `
+      .label {
+        font-family: var(--font-sans);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--color-muted);
+        margin-bottom: 1rem;
+        font-weight: 500;
+      }
+      .title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 500;
+        letter-spacing: -0.015em;
+        line-height: 1.1;
+        margin: 0 0 2rem 0;
+      }
+      .pair {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .example {
+        display: flex;
+        gap: 0.9rem;
+        align-items: baseline;
+        padding: 0.9rem 1.1rem;
+        font-family: var(--font-sans);
+        font-size: clamp(0.95rem, 1.35vw, 1.1rem);
+        line-height: 1.5;
+      }
+      .example.bad {
+        border-left: 3px solid var(--color-coral);
+      }
+      .example.good {
+        border-left: 3px solid var(--color-sage);
+      }
+      .mark {
+        font-weight: 700;
+        font-family: var(--font-mono);
+      }
+      .bad .mark {
+        color: var(--color-coral);
+      }
+      .good .mark {
+        color: var(--color-sage);
+      }
+      .takeaway {
+        margin-top: 2rem;
+        font-family: var(--font-sans);
+        font-style: italic;
+        color: var(--color-muted);
+        max-width: 58ch;
+      }
+    `,
+  ],
 })
 export class PrincipleSlideComponent {
   readonly slide = input.required<PrincipleSlideConfig>();
@@ -2025,6 +2271,7 @@ export class PrincipleSlideComponent {
 - [ ] **Step 2: Wire into `SlideHostComponent`**
 
 Add import; replace `@case ('principle')`:
+
 ```html
 @case ('principle') { <app-principle-slide [slide]="$any(slide())" /> }
 ```
@@ -2039,6 +2286,7 @@ git commit -m "feat: PrincipleSlide layout"
 ### Task 4.4: `CodeSlide` with syntax highlighting
 
 **Files:**
+
 - Create: `src/app/deck/layouts/code-slide.component.ts`
 - Modify: `src/app/app.config.ts` (add highlight provider)
 - Modify: `src/app/deck/slide-host.component.ts`
@@ -2046,6 +2294,7 @@ git commit -m "feat: PrincipleSlide layout"
 - [ ] **Step 1: Provide the highlight module**
 
 Modify `src/app/app.config.ts` to add the Highlight provider:
+
 ```ts
 import { provideHighlightOptions } from 'ngx-highlightjs';
 
@@ -2082,29 +2331,44 @@ import { CodeSlideConfig } from '../slide-config';
       }
     </section>
   `,
-  styles: [`
-    .label {
-      font-family: var(--font-sans); font-size: 0.7rem;
-      text-transform: uppercase; letter-spacing: 0.22em;
-      color: var(--color-muted); margin-bottom: 1rem; font-weight: 500;
-    }
-    .title {
-      font-family: var(--font-display);
-      font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 500;
-      letter-spacing: -0.015em; margin: 0 0 1.5rem 0;
-    }
-    .code {
-      background: #1a1a1a; color: #e6edf3;
-      padding: 1.25rem 1.5rem; border-radius: 10px;
-      font-family: var(--font-mono); font-size: clamp(0.8rem, 1vw, 0.95rem);
-      line-height: 1.55; overflow-x: auto;
-      max-width: 72ch;
-    }
-    .caption {
-      margin-top: 1rem; font-family: var(--font-sans);
-      color: var(--color-muted); font-size: 0.95rem; max-width: 72ch;
-    }
-  `],
+  styles: [
+    `
+      .label {
+        font-family: var(--font-sans);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--color-muted);
+        margin-bottom: 1rem;
+        font-weight: 500;
+      }
+      .title {
+        font-family: var(--font-display);
+        font-size: clamp(1.75rem, 3vw, 2.5rem);
+        font-weight: 500;
+        letter-spacing: -0.015em;
+        margin: 0 0 1.5rem 0;
+      }
+      .code {
+        background: #1a1a1a;
+        color: #e6edf3;
+        padding: 1.25rem 1.5rem;
+        border-radius: 10px;
+        font-family: var(--font-mono);
+        font-size: clamp(0.8rem, 1vw, 0.95rem);
+        line-height: 1.55;
+        overflow-x: auto;
+        max-width: 72ch;
+      }
+      .caption {
+        margin-top: 1rem;
+        font-family: var(--font-sans);
+        color: var(--color-muted);
+        font-size: 0.95rem;
+        max-width: 72ch;
+      }
+    `,
+  ],
 })
 export class CodeSlideComponent {
   readonly slide = input.required<CodeSlideConfig>();
@@ -2127,6 +2391,7 @@ git commit -m "feat: CodeSlide layout with ngx-highlightjs"
 ### Task 4.5: `DemoCueSlide`
 
 **Files:**
+
 - Create: `src/app/deck/layouts/demo-cue-slide.component.ts`
 - Modify: `src/app/deck/slide-host.component.ts`
 
@@ -2148,17 +2413,25 @@ import { DemoCueSlideConfig } from '../slide-config';
       }
     </section>
   `,
-  styles: [`
-    .cue {
-      font-family: var(--font-display); font-weight: 500;
-      font-size: clamp(4rem, 12vw, 10rem); line-height: 1;
-      color: var(--color-coral); letter-spacing: -0.03em;
-    }
-    .note {
-      margin-top: 2.5rem; font-family: var(--font-sans);
-      color: var(--color-muted); font-size: 1rem; max-width: 40ch;
-    }
-  `],
+  styles: [
+    `
+      .cue {
+        font-family: var(--font-display);
+        font-weight: 500;
+        font-size: clamp(4rem, 12vw, 10rem);
+        line-height: 1;
+        color: var(--color-coral);
+        letter-spacing: -0.03em;
+      }
+      .note {
+        margin-top: 2.5rem;
+        font-family: var(--font-sans);
+        color: var(--color-muted);
+        font-size: 1rem;
+        max-width: 40ch;
+      }
+    `,
+  ],
 })
 export class DemoCueSlideComponent {
   readonly slide = input.required<DemoCueSlideConfig>();
@@ -2181,6 +2454,7 @@ git commit -m "feat: DemoCueSlide layout"
 ### Task 4.6: `FaqSlide`
 
 **Files:**
+
 - Create: `src/app/deck/layouts/faq-slide.component.ts`
 - Modify: `src/app/deck/slide-host.component.ts`
 
@@ -2201,22 +2475,34 @@ import { FaqSlideConfig } from '../slide-config';
       <p class="answer">{{ slide().answer }}</p>
     </section>
   `,
-  styles: [`
-    .label {
-      font-family: var(--font-sans); font-size: 0.7rem;
-      text-transform: uppercase; letter-spacing: 0.22em;
-      color: var(--color-coral); margin-bottom: 1rem; font-weight: 600;
-    }
-    .question {
-      font-family: var(--font-display); font-weight: 500;
-      font-size: clamp(1.75rem, 3.5vw, 2.75rem); line-height: 1.15;
-      letter-spacing: -0.015em; margin: 0 0 1.75rem 0;
-    }
-    .answer {
-      font-family: var(--font-sans); font-size: clamp(1rem, 1.4vw, 1.2rem);
-      line-height: 1.55; max-width: 58ch; color: var(--color-ink);
-    }
-  `],
+  styles: [
+    `
+      .label {
+        font-family: var(--font-sans);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--color-coral);
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+      .question {
+        font-family: var(--font-display);
+        font-weight: 500;
+        font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+        line-height: 1.15;
+        letter-spacing: -0.015em;
+        margin: 0 0 1.75rem 0;
+      }
+      .answer {
+        font-family: var(--font-sans);
+        font-size: clamp(1rem, 1.4vw, 1.2rem);
+        line-height: 1.55;
+        max-width: 58ch;
+        color: var(--color-ink);
+      }
+    `,
+  ],
 })
 export class FaqSlideComponent {
   readonly slide = input.required<FaqSlideConfig>();
@@ -2252,6 +2538,7 @@ git commit -m "feat: FaqSlide layout"
 ### Task 5.1: Populate `slides.data.ts` with the real content
 
 **Files:**
+
 - Modify: `src/app/deck/slides.data.ts`
 
 This task replaces the placeholder `SLIDES` export with the full French content (~30 slides). Because content maps 1:1 onto the spec's narrative spine, slide ordering below intentionally mirrors §3 of the spec.
@@ -2289,8 +2576,8 @@ export const SLIDES: readonly SlideConfig[] = [
     title: 'Ces slides ont été construites avec Claude Code.',
     bullets: [
       'Je vous montre le commit log à la fin.',
-      'Toute l\'app Angular, tout le thème, tout le déploiement.',
-      'Ce que vous voyez, c\'est la preuve que ça marche.',
+      "Toute l'app Angular, tout le thème, tout le déploiement.",
+      "Ce que vous voyez, c'est la preuve que ça marche.",
     ],
   },
 
@@ -2299,7 +2586,7 @@ export const SLIDES: readonly SlideConfig[] = [
     kind: 'title',
     label: 'Act 2',
     title: 'La boucle de base',
-    subtitle: 'Ce qu\'il faut pour commencer — et rien de plus.',
+    subtitle: "Ce qu'il faut pour commencer — et rien de plus.",
   },
   {
     kind: 'code',
@@ -2308,12 +2595,13 @@ export const SLIDES: readonly SlideConfig[] = [
     language: 'bash',
     code: `npm install -g @anthropic-ai/claude-code
 claude   # dans n'importe quel repo`,
-    caption: 'Première fois : un écran d\'auth s\'ouvre dans le navigateur. Ensuite, c\'est juste `claude`.',
+    caption:
+      "Première fois : un écran d'auth s'ouvre dans le navigateur. Ensuite, c'est juste `claude`.",
   },
   {
     kind: 'content',
     label: 'Les essentiels',
-    title: '5 choses à retenir — aucune autre pour l\'instant.',
+    title: "5 choses à retenir — aucune autre pour l'instant.",
     bullets: [
       'Shift+Tab → plan mode (le plus gros unlock)',
       '@fichier.ts → pointer Claude sur un fichier précis',
@@ -2328,13 +2616,13 @@ claude   # dans n'importe quel repo`,
     title: 'Shift+Tab — plan mode.',
     bad: 'Claude applique directement, vous découvrez le résultat après.',
     good: 'Claude propose un plan, vous approuvez, il exécute.',
-    takeaway: '30 secondes d\'attente, 30 minutes de mauvaise direction évitées.',
+    takeaway: "30 secondes d'attente, 30 minutes de mauvaise direction évitées.",
   },
   {
     kind: 'principle',
     label: 'Essentiel · 2/5',
     title: '@fichier.ts — le contexte.',
-    bad: 'Explique moi comment fonctionne l\'authentification.',
+    bad: "Explique moi comment fonctionne l'authentification.",
     good: 'Explique-moi @auth.service.ts et @auth.guard.ts, leur rôle respectif.',
     takeaway: 'Claude lit exactement les fichiers que vous nommez — pas de devinette.',
   },
@@ -2360,15 +2648,15 @@ claude   # dans n'importe quel repo`,
     title: '/clear — le reset.',
     bad: 'Continuer une conversation de 2h qui a dérivé sur trois sujets.',
     good: '/clear — contexte propre, nouvelle tâche bien cadrée.',
-    takeaway: 'Claude n\'oublie pas ce qu\'il y a dans votre code, seulement la discussion.',
+    takeaway: "Claude n'oublie pas ce qu'il y a dans votre code, seulement la discussion.",
   },
   {
     kind: 'content',
     label: 'Il y a plus, mais',
-    title: 'C\'est un deuxième talk.',
+    title: "C'est un deuxième talk.",
     bullets: [
       'Hooks, subagents, MCP servers, slash commands custom, plugins…',
-      'Tout ça existe et c\'est puissant.',
+      "Tout ça existe et c'est puissant.",
       'Mais pour commencer : les 5 ci-dessus suffisent largement.',
     ],
   },
@@ -2385,8 +2673,8 @@ claude   # dans n'importe quel repo`,
     label: 'Bien prompter · 1/4',
     title: 'Un objectif, pas une tâche.',
     bad: 'Fix the login bug.',
-    good: '@LoginComponent connecte l\'utilisateur mais n\'enregistre pas son rôle dans AuthService. Trouve pourquoi et ajoute un test unitaire.',
-    takeaway: 'Un objectif a des critères d\'acceptation. Une tâche a juste un verbe.',
+    good: "@LoginComponent connecte l'utilisateur mais n'enregistre pas son rôle dans AuthService. Trouve pourquoi et ajoute un test unitaire.",
+    takeaway: "Un objectif a des critères d'acceptation. Une tâche a juste un verbe.",
   },
   {
     kind: 'principle',
@@ -2394,14 +2682,14 @@ claude   # dans n'importe quel repo`,
     title: 'Contexte, pas solution.',
     bad: 'Ajoute un Map<String, List<User>> ici.',
     good: '@UserService doit grouper les users par département. Utilise le style de @OrderService.groupByCustomer.',
-    takeaway: 'Donnez-lui des pointeurs. Laissez-le choisir l\'outil.',
+    takeaway: "Donnez-lui des pointeurs. Laissez-le choisir l'outil.",
   },
   {
     kind: 'principle',
     label: 'Bien prompter · 3/4',
     title: 'Plan mode pour tout ce qui est non-trivial.',
-    bad: 'Refactor la couche d\'accès base de données. (Claude attaque directement.)',
-    good: 'Shift+Tab → Refactor la couche d\'accès base de données. (Claude propose, vous approuvez.)',
+    bad: "Refactor la couche d'accès base de données. (Claude attaque directement.)",
+    good: "Shift+Tab → Refactor la couche d'accès base de données. (Claude propose, vous approuvez.)",
     takeaway: '30 secondes d\'attente, beaucoup moins de "ah mais c\'était pas du tout ça".',
   },
   {
@@ -2444,7 +2732,7 @@ claude   # dans n'importe quel repo`,
     bullets: [
       'Le deck reste en ligne — revenez-y quand vous oubliez un raccourci.',
       'Le repo de démo est public — clonez-le, cassez-le, essayez.',
-      'Des questions plus tard ? Venez, j\'aime en parler.',
+      "Des questions plus tard ? Venez, j'aime en parler.",
     ],
   },
 
@@ -2452,26 +2740,30 @@ claude   # dans n'importe quel repo`,
   {
     kind: 'faq',
     group: 'faq',
-    question: 'C\'est safe avec notre code privé ?',
-    answer: 'Par défaut, votre code n\'est pas utilisé pour entraîner les modèles Anthropic. Les plans Enterprise ajoutent des garanties sur la rétention et l\'isolation. Pour un repo sensible, vérifier la config de votre workspace avant de lancer la commande.',
+    question: "C'est safe avec notre code privé ?",
+    answer:
+      "Par défaut, votre code n'est pas utilisé pour entraîner les modèles Anthropic. Les plans Enterprise ajoutent des garanties sur la rétention et l'isolation. Pour un repo sensible, vérifier la config de votre workspace avant de lancer la commande.",
   },
   {
     kind: 'faq',
     group: 'faq',
     question: 'Ça marche avec IntelliJ / VS Code ?',
-    answer: 'Oui — il existe des extensions officielles Claude Code pour VS Code et JetBrains. L\'agent reste le même (il tourne dans votre terminal), mais l\'extension ajoute une intégration avec le diff viewer et les fichiers ouverts.',
+    answer:
+      "Oui — il existe des extensions officielles Claude Code pour VS Code et JetBrains. L'agent reste le même (il tourne dans votre terminal), mais l'extension ajoute une intégration avec le diff viewer et les fichiers ouverts.",
   },
   {
     kind: 'faq',
     group: 'faq',
     question: 'On peut le brancher sur Jira / Confluence ?',
-    answer: 'Oui — via les MCP servers (Model Context Protocol). On branche une source externe (Jira, Confluence, une DB, une doc interne) et Claude peut la consulter pendant une conversation. C\'est un sujet à part entière.',
+    answer:
+      "Oui — via les MCP servers (Model Context Protocol). On branche une source externe (Jira, Confluence, une DB, une doc interne) et Claude peut la consulter pendant une conversation. C'est un sujet à part entière.",
   },
   {
     kind: 'faq',
     group: 'faq',
     question: 'Et GitHub Copilot, on garde ou on jette ?',
-    answer: 'Les deux sont complémentaires, pas concurrents. Copilot autocomplète pendant que vous tapez. Claude Code planifie et exécute du travail multi-fichiers. Beaucoup de devs utilisent les deux — Copilot pour la vitesse locale, Claude Code pour les tâches plus larges.',
+    answer:
+      'Les deux sont complémentaires, pas concurrents. Copilot autocomplète pendant que vous tapez. Claude Code planifie et exécute du travail multi-fichiers. Beaucoup de devs utilisent les deux — Copilot pour la vitesse locale, Claude Code pour les tâches plus larges.',
   },
 ];
 ```
@@ -2508,6 +2800,7 @@ git commit -m "feat: populate deck content (Acts 1-5 + FAQ)"
 ### Task 6.1: Set up `ng deploy` script
 
 **Files:**
+
 - Modify: `package.json`
 - Modify: `angular.json`
 
@@ -2522,6 +2815,7 @@ Expected: listed as devDependency (installed in Task 2.4). If missing, install i
 - [ ] **Step 2: Add a `deploy` npm script**
 
 In `package.json` scripts:
+
 ```json
 "deploy": "ng deploy --base-href=/claude-cli/ --no-silent"
 ```
@@ -2576,6 +2870,7 @@ Expected: builds `dist/`, pushes to a `gh-pages` branch, prints the deployed URL
 - [ ] **Step 2: Enable GitHub Pages in repo settings**
 
 If GitHub Pages isn't already set up:
+
 ```bash
 gh api repos/<user>/claude-cli/pages -X POST -f source.branch=gh-pages -f source.path=/
 ```
@@ -2613,6 +2908,7 @@ Expected: dev server at `http://localhost:4200`, UI renders, buttons click (and 
 - [ ] **Item 2: Run `claude` on the fresh demo clone**
 
 In the same scratch clone, with `claude` installed:
+
 ```bash
 claude
 # prompt: "The toggle button doesn't update the UI. Fix it."
@@ -2625,6 +2921,7 @@ Expected: Claude reads `CLAUDE.md`, notices the "no mutation" convention, propos
 - [ ] **Item 3: Plan-mode adds the filter feature cleanly**
 
 Same scratch clone, `claude`, `Shift+Tab`:
+
 ```
 Add a filter dropdown (toutes / actives / terminées) above the mission list. Keep the `OnPush` + immutability conventions.
 ```
@@ -2641,7 +2938,7 @@ Run the full deck end-to-end with a timer. Expected: ~30 min content, leaving ~1
 
 - [ ] **Item 6: Fallback plan**
 
-Record an asciinema of the demo from Item 2 & 3 *before* the talk. Store it accessible from the `demo-cue` slide (open in a browser tab, paused). Decision on the day: go live or play the recording. Both are fine — ship the option.
+Record an asciinema of the demo from Item 2 & 3 _before_ the talk. Store it accessible from the `demo-cue` slide (open in a browser tab, paused). Decision on the day: go live or play the recording. Both are fine — ship the option.
 
 ---
 
@@ -2649,15 +2946,15 @@ Record an asciinema of the demo from Item 2 & 3 *before* the talk. Store it acce
 
 The plan covers every requirement in the spec:
 
-| Spec section | Covered in |
-|---|---|
-| §3 Narrative spine (Acts 1-5 + FAQ) | Task 5.1 (content); Tasks 4.1-4.6 (layouts for each slide kind) |
-| §4 Visual style | Task 2.2 (theme tokens) + Task 2.3 (fonts) + all layout `:host` styles |
-| §5 Deck architecture | Phases 2-4 (scaffolding, plumbing, layouts) |
-| §6 Demo repo | Phase 1 in full |
-| §7 Hosting | Tasks 1.12, 6.2 (GitHub repos), 6.3 (Pages deploy) |
-| §8 Non-goals | Explicitly not built: no presenter mode, no fake-terminal emulator, no long-scroll layout |
-| §9 Risks | Task 7.1 Item 2 addresses the "CLAUDE.md doesn't fire" risk; Item 6 addresses the live-demo-fails risk |
-| §10 Deliverables checklist | Matches Tasks 1.12, 6.3, and 7.1 |
+| Spec section                        | Covered in                                                                                             |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| §3 Narrative spine (Acts 1-5 + FAQ) | Task 5.1 (content); Tasks 4.1-4.6 (layouts for each slide kind)                                        |
+| §4 Visual style                     | Task 2.2 (theme tokens) + Task 2.3 (fonts) + all layout `:host` styles                                 |
+| §5 Deck architecture                | Phases 2-4 (scaffolding, plumbing, layouts)                                                            |
+| §6 Demo repo                        | Phase 1 in full                                                                                        |
+| §7 Hosting                          | Tasks 1.12, 6.2 (GitHub repos), 6.3 (Pages deploy)                                                     |
+| §8 Non-goals                        | Explicitly not built: no presenter mode, no fake-terminal emulator, no long-scroll layout              |
+| §9 Risks                            | Task 7.1 Item 2 addresses the "CLAUDE.md doesn't fire" risk; Item 6 addresses the live-demo-fails risk |
+| §10 Deliverables checklist          | Matches Tasks 1.12, 6.3, and 7.1                                                                       |
 
 No placeholders remain in committed code. The only placeholder in the plan is `<GITHUB_USERNAME>` / `<user>`, which is resolved at execution time in Tasks 1.11 and 6.3.
