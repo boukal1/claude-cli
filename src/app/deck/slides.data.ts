@@ -133,7 +133,8 @@ irm https://claude.ai/install.ps1 | iex
     title: '# — la mémoire projet.',
     bad: 'Re-rappeler les conventions à chaque nouvelle conversation.',
     good: '# Toujours utiliser RxJS. Jamais de Promise. → écrit dans CLAUDE.md.',
-    takeaway: 'CLAUDE.md est chargé automatiquement. Une fois pour toutes.',
+    takeaway:
+      'CLAUDE.md est chargé automatiquement. Une fois pour toutes. Dire « retiens ça » marche aussi (voir FAQ).',
   },
   {
     kind: 'content',
@@ -256,5 +257,12 @@ irm https://claude.ai/install.ps1 | iex
     question: 'Je peux coller un chemin complet au lieu de @fichier ?',
     answer:
       "Oui — Claude lit le fichier dans les deux cas. Le préfixe @ ajoute juste l'autocomplete du CLI (scopé au repo, anti-typo, facile à empiler : @a.ts @b.ts @c.ts). Un chemin pasté fonctionne aussi. Seule nuance : hors du repo, Claude demandera la permission avant de lire.",
+  },
+  {
+    kind: 'faq',
+    group: 'faq',
+    question: 'Je peux juste dire « retiens ça » au lieu de # ?',
+    answer:
+      "Oui, mais pas pareil. # est une commande du CLI : zéro token, note écrite verbatim, et Claude vous demande où l'enregistrer (projet, user, parent). « Retiens ça » consomme un tour d'agent, Claude reformule souvent, et il choisit le fichier à votre place.",
   },
 ];
