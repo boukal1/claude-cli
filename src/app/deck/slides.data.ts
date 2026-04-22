@@ -68,14 +68,22 @@ irm https://claude.ai/install.ps1 | iex
     label: 'Les essentiels',
     title: "Les plus essentiels — aucun autre pour l'instant.",
     bullets: [
+      '/init → poser un premier CLAUDE.md',
       '/plan (ou Shift+Tab) → plan mode — le plus gros unlock',
       '/clear → repartir sur un contexte propre',
       '/compact → condenser la conversation sans tout perdre',
       '/usage → voir votre quota et le modèle actif',
-      '/init → poser un premier CLAUDE.md',
       '@fichier.ts → pointer Claude sur un fichier précis',
       '# → sauvegarder une note dans CLAUDE.md',
     ],
+  },
+  {
+    kind: 'principle',
+    label: 'Essentiel',
+    title: '/init — premier CLAUDE.md.',
+    bad: "Partir d'une page blanche pour rédiger CLAUDE.md.",
+    good: '/init → Claude lit votre repo et propose un CLAUDE.md de départ (langage, scripts, conventions).',
+    takeaway: 'Un bon starter — à affiner avec # au fil du temps.',
   },
   {
     kind: 'principle',
@@ -109,14 +117,6 @@ irm https://claude.ai/install.ps1 | iex
     bad: "Au milieu d'une session, Claude répond « quota atteint ». Surprise.",
     good: "/usage → quota restant, modèle actif, fenêtre de 5h en un coup d'œil.",
     takeaway: "Sur Pro ou Max, savoir où vous en êtes avant d'attaquer la grosse session.",
-  },
-  {
-    kind: 'principle',
-    label: 'Essentiel',
-    title: '/init — premier CLAUDE.md.',
-    bad: "Partir d'une page blanche pour rédiger CLAUDE.md.",
-    good: '/init → Claude lit votre repo et propose un CLAUDE.md de départ (langage, scripts, conventions).',
-    takeaway: 'Un bon starter — à affiner avec # au fil du temps.',
   },
   {
     kind: 'principle',
