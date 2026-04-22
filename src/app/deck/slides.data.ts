@@ -83,6 +83,16 @@ irm https://claude.ai/install.ps1 | iex
     title: '/init — premier CLAUDE.md.',
     bad: "Partir d'une page blanche pour rédiger CLAUDE.md.",
     good: '/init → Claude lit votre repo et propose un CLAUDE.md de départ (langage, scripts, conventions).',
+    demo: {
+      command: '/init',
+      output: [
+        'Analyzing repository…',
+        '  ✓ Angular 21 (TypeScript, Vitest)',
+        '  ✓ Conventions : OnPush, signals',
+        '',
+        'CLAUDE.md écrit à la racine du repo.',
+      ],
+    },
     takeaway: 'Un bon starter — à affiner avec # au fil du temps.',
   },
   {
@@ -91,6 +101,18 @@ irm https://claude.ai/install.ps1 | iex
     title: 'Plan mode — /plan ou Shift+Tab.',
     bad: 'Claude applique directement, vous découvrez le résultat après.',
     good: 'Claude propose un plan, vous approuvez, il exécute.',
+    demo: {
+      command: '/plan',
+      output: [
+        'Plan mode enabled.',
+        '',
+        '  1. Lire auth.service.ts',
+        '  2. Remplacer BehaviorSubject par signal',
+        '  3. Adapter les tests',
+        '',
+        '[Approve / Edit / Cancel]',
+      ],
+    },
     takeaway:
       "Tapez /plan dans le prompt (ou Shift+Tab si vous préférez le raccourci) — 30 secondes d'attente, 30 minutes de mauvaise direction évitées.",
   },
@@ -100,6 +122,13 @@ irm https://claude.ai/install.ps1 | iex
     title: '/clear — le reset.',
     bad: 'Continuer une conversation de 2h qui a dérivé sur trois sujets.',
     good: '/clear — contexte propre, nouvelle tâche bien cadrée.',
+    demo: {
+      command: '/clear',
+      output: [
+        'Conversation effacée.',
+        'Vos fichiers et CLAUDE.md restent chargés.',
+      ],
+    },
     takeaway: "Claude n'oublie pas ce qu'il y a dans votre code, seulement la discussion.",
   },
   {
@@ -108,6 +137,18 @@ irm https://claude.ai/install.ps1 | iex
     title: '/compact — le condenseur.',
     bad: "Session de 2h, 100k tokens — Claude ralentit, vous n'osez pas tout jeter.",
     good: '/compact → Claude résume la conversation, vous gardez le fil, les tokens repartent bas.',
+    demo: {
+      command: '/compact',
+      output: [
+        'Compacting 47 messages (124k tokens)…',
+        '',
+        'Kept :',
+        '  • Task : refactor auth.service',
+        '  • Decisions : utiliser signals',
+        '',
+        'Context now : 8k tokens.',
+      ],
+    },
     takeaway: "/clear oublie tout. /compact garde l'essentiel.",
   },
   {
@@ -116,6 +157,19 @@ irm https://claude.ai/install.ps1 | iex
     title: '/usage — votre quota.',
     bad: "Au milieu d'une session, Claude répond « quota atteint ». Surprise.",
     good: "/usage → quota restant, modèle actif, fenêtre de 5h en un coup d'œil.",
+    demo: {
+      command: '/usage',
+      output: [
+        'Plan    : Max 5×',
+        'Model   : claude-opus-4-7',
+        '',
+        'Session window (5h) :',
+        '  Opus      34 %',
+        '  Sonnet     8 %',
+        '',
+        'Next reset : in 3h 37m',
+      ],
+    },
     takeaway: "Sur Pro ou Max, savoir où vous en êtes avant d'attaquer la grosse session.",
   },
   {

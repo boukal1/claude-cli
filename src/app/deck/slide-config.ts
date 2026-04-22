@@ -52,7 +52,7 @@ export interface ContentSlideConfig extends BaseSlide {
 
 /**
  * Principle / before-after slide — one ❌ counter-example and one ✅ good example,
- * optionally followed by a single-sentence takeaway.
+ * optionally followed by a compact terminal demo and a single-sentence takeaway.
  */
 export interface PrincipleSlideConfig extends BaseSlide {
   readonly kind: 'principle';
@@ -64,6 +64,19 @@ export interface PrincipleSlideConfig extends BaseSlide {
   readonly good: string;
   /** Optional one-sentence takeaway below the examples. */
   readonly takeaway?: string;
+  /** Optional terminal demo rendered between the good example and the takeaway. */
+  readonly demo?: PrincipleDemo;
+}
+
+/**
+ * Compact terminal demo embedded inside a principle slide — shows the command
+ * the user types followed by a fabricated but representative CLI response.
+ */
+export interface PrincipleDemo {
+  /** The command the user types at the prompt (e.g., `/init`). */
+  readonly command: string;
+  /** Output lines rendered below the command, preserved as-is with spacing. */
+  readonly output: readonly string[];
 }
 
 /**

@@ -25,6 +25,17 @@ import { PrincipleSlideConfig } from '../slide-config';
           <span class="text">{{ slide().good }}</span>
         </div>
       </div>
+      @if (slide().demo; as demo) {
+        <div class="demo">
+          <div class="demo-line demo-prompt">
+            <span class="prompt-caret">&gt;</span>
+            <span class="prompt-cmd">{{ demo.command }}</span>
+          </div>
+          @for (line of demo.output; track $index) {
+            <div class="demo-line demo-out">{{ line }}</div>
+          }
+        </div>
+      }
       @if (slide().takeaway) {
         <p class="takeaway">{{ slide().takeaway }}</p>
       }
@@ -79,8 +90,38 @@ import { PrincipleSlideConfig } from '../slide-config';
       .good .mark {
         color: var(--color-sage);
       }
+      .demo {
+        margin-top: 1.5rem;
+        background: #0c0c0c;
+        border-radius: 8px;
+        padding: 0.9rem 1.2rem;
+        font-family: var(--font-mono);
+        font-size: clamp(0.75rem, 0.92vw, 0.88rem);
+        line-height: 1.55;
+        color: rgba(230, 230, 230, 0.85);
+        max-width: 56rem;
+        box-shadow: 0 10px 25px -12px rgba(0, 0, 0, 0.25);
+      }
+      .demo-line {
+        white-space: pre;
+      }
+      .demo-prompt {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 0.25rem;
+      }
+      .prompt-caret {
+        color: var(--color-coral);
+        font-weight: 600;
+      }
+      .prompt-cmd {
+        color: #ffffff;
+      }
+      .demo-out {
+        color: rgba(230, 230, 230, 0.72);
+      }
       .takeaway {
-        margin-top: 2rem;
+        margin-top: 1.5rem;
         font-family: var(--font-sans);
         font-style: italic;
         color: var(--color-muted);
