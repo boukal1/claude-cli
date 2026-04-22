@@ -33,21 +33,27 @@ import { TerminalSlideConfig } from '../slide-config';
             <span class="command">{{ slide().command }}</span>
           </div>
 
-          <div class="welcome">
-            <div class="welcome-header">
-              <span class="sparkle">✻</span>
-              <span class="welcome-title">Welcome to Claude Code</span>
+          @if (slide().output; as output) {
+            @for (line of output; track $index) {
+              <div class="out-line">{{ line }}</div>
+            }
+          } @else {
+            <div class="welcome">
+              <div class="welcome-header">
+                <span class="sparkle">✻</span>
+                <span class="welcome-title">Welcome to Claude Code</span>
+              </div>
+              <div class="welcome-body">
+                <div>/help for help, /status for your setup</div>
+                <div class="cwd-line">cwd: {{ slide().cwd }}</div>
+              </div>
             </div>
-            <div class="welcome-body">
-              <div>/help for help, /status for your setup</div>
-              <div class="cwd-line">cwd: {{ slide().cwd }}</div>
-            </div>
-          </div>
 
-          <div class="input-line">
-            <span class="input-caret">&gt;</span>
-            <span class="caret-blink"></span>
-          </div>
+            <div class="input-line">
+              <span class="input-caret">&gt;</span>
+              <span class="caret-blink"></span>
+            </div>
+          }
         </div>
       </div>
 
@@ -133,6 +139,11 @@ import { TerminalSlideConfig } from '../slide-config';
       }
       .command {
         color: #ffffff;
+      }
+      .out-line {
+        margin-top: 0.1rem;
+        color: rgba(230, 230, 230, 0.78);
+        white-space: pre;
       }
       .welcome {
         margin-top: 1.1rem;

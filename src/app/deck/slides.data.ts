@@ -41,17 +41,22 @@ export const SLIDES: readonly SlideConfig[] = [
     subtitle: "Ce qu'il faut pour commencer — et rien de plus.",
   },
   {
-    kind: 'code',
+    kind: 'terminal',
     label: 'Installation',
     title: 'Sous Windows — deux options.',
-    language: 'powershell',
-    code: `# Option 1 — PowerShell, une ligne
-irm https://claude.ai/install.ps1 | iex
-
-# Option 2 — installeur officiel
-# Téléchargez le .exe depuis claude.ai/download`,
+    titleBar: 'Windows PowerShell',
+    cwd: 'C:\\',
+    command: 'irm https://claude.ai/install.ps1 | iex',
+    output: [
+      '',
+      'Downloading Claude Code for Windows…',
+      '  ✓ claude.exe installed',
+      '  ✓ Added to PATH',
+      '',
+      'Installation complete. Run `claude` to start.',
+    ],
     caption:
-      "Pas de Node.js à gérer : l'installeur natif pose le binaire `claude` directement dans votre PATH.",
+      "Option 2 : téléchargez l'installeur .exe depuis claude.ai/download — même résultat, pas de Node.js à gérer.",
   },
   {
     kind: 'terminal',

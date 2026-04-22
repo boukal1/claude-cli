@@ -111,6 +111,13 @@ export interface TerminalSlideConfig extends BaseSlide {
   readonly command: string;
   /** Optional caption rendered below the terminal frame. */
   readonly caption?: string;
+  /**
+   * Optional transcript lines rendered after the command. When provided, the
+   * Claude welcome banner is hidden and these lines are shown as the terminal
+   * response — use this for install flows, one-off command demos, etc. When
+   * omitted, the component renders the default Claude welcome banner.
+   */
+  readonly output?: readonly string[];
 }
 
 /**
