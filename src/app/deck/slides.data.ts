@@ -124,7 +124,8 @@ irm https://claude.ai/install.ps1 | iex
     title: '@fichier.ts — le contexte.',
     bad: "Explique moi comment fonctionne l'authentification.",
     good: 'Explique-moi @auth.service.ts et @auth.guard.ts, leur rôle respectif.',
-    takeaway: 'Claude lit exactement les fichiers que vous nommez — pas de devinette.',
+    takeaway:
+      'Claude lit exactement les fichiers que vous nommez — pas de devinette. Un chemin complet pasté fonctionne aussi (voir FAQ).',
   },
   {
     kind: 'principle',
@@ -248,5 +249,12 @@ irm https://claude.ai/install.ps1 | iex
     question: 'Et GitHub Copilot, on garde ou on jette ?',
     answer:
       'Les deux sont complémentaires, pas concurrents. Copilot autocomplète pendant que vous tapez. Claude Code planifie et exécute du travail multi-fichiers. Beaucoup de devs utilisent les deux — Copilot pour la vitesse locale, Claude Code pour les tâches plus larges.',
+  },
+  {
+    kind: 'faq',
+    group: 'faq',
+    question: 'Je peux coller un chemin complet au lieu de @fichier ?',
+    answer:
+      "Oui — Claude lit le fichier dans les deux cas. Le préfixe @ ajoute juste l'autocomplete du CLI (scopé au repo, anti-typo, facile à empiler : @a.ts @b.ts @c.ts). Un chemin pasté fonctionne aussi. Seule nuance : hors du repo, Claude demandera la permission avant de lire.",
   },
 ];
