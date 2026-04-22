@@ -24,12 +24,12 @@ The meta-hook of the talk is that **both repos are built using Claude Code**, wi
 
 Five acts, ~30 min of content + ~10 min of slack for questions.
 
-### Act 1 — Le hook *(~4 min)*
+### Act 1 — Le hook _(~4 min)_
 
-- **"Pourquoi un CLI ?"** ChatGPT lives in a browser tab and has no idea about *your* code. Claude Code lives in your repo — reads your files, runs your commands, learns your conventions. It's a colleague, not a clipboard.
-- **Meta reveal:** *"Ces slides ont été construits avec Claude Code. Je vous montre le commit log à la fin."*
+- **"Pourquoi un CLI ?"** ChatGPT lives in a browser tab and has no idea about _your_ code. Claude Code lives in your repo — reads your files, runs your commands, learns your conventions. It's a colleague, not a clipboard.
+- **Meta reveal:** _"Ces slides ont été construits avec Claude Code. Je vous montre le commit log à la fin."_
 
-### Act 2 — La boucle de base *(~6 min)*
+### Act 2 — La boucle de base _(~6 min)_
 
 - One slide: install + launch (`npm install -g @anthropic-ai/claude-code`, then `claude` in any folder).
 - **The five essentials:**
@@ -40,7 +40,7 @@ Five acts, ~30 min of content + ~10 min of slack for questions.
   5. `/clear` → reset context when it gets muddled
 - **Signpost slide:** "Il y a plus — hooks, subagents, MCPs, slash commands, plugins… c'est un deuxième talk."
 
-### Act 3 — Bien prompter *(~8 min)* — the sticky part
+### Act 3 — Bien prompter _(~8 min)_ — the sticky part
 
 Four principles, one `❌` vs `✅` before-after example each. Examples use Java / Angular vocabulary.
 
@@ -49,7 +49,7 @@ Four principles, one `❌` vs `✅` before-after example each. Examples use Java
 3. **Plan mode pour tout ce qui est non-trivial.** Let Claude propose, you approve, then execute. Costs 30 seconds, saves 30 minutes.
 4. **Vérifier avant de faire confiance.** Claude says "done, all tests pass." Run the tests yourself. It's a brilliant junior, not an oracle.
 
-### Act 4 — Démo live *(~8 min, expandable to ~15)*
+### Act 4 — Démo live _(~8 min, expandable to ~15)_
 
 Live on `claude-demo-playground` (cloned fresh on stage).
 
@@ -59,20 +59,20 @@ Live on `claude-demo-playground` (cloned fresh on stage).
 
 **One honest moment required:** Claude's first attempt at the bug is slightly wrong (fixes the symptom but not the immutability root cause). The speaker then course-corrects with more context. Colleagues need to see the correction loop to trust the claim that it works.
 
-### Act 5 — Meta reveal & takeaways *(~3 min)*
+### Act 5 — Meta reveal & takeaways _(~3 min)_
 
-- Terminal: `git log --oneline` on *this very deck's* repo, scrolled live.
+- Terminal: `git log --oneline` on _this very deck's_ repo, scrolled live.
 - **Three things to try Monday:** (1) drop a `CLAUDE.md` in your current repo with 3 conventions, (2) next ticket → plan mode first, (3) next file-editing prompt → start with `@`.
 - Cheat sheet URL = the deployed deck.
 
-### FAQ appendix *(jumpable via keyboard shortcut)*
+### FAQ appendix _(jumpable via keyboard shortcut)_
 
 Four Q&A slides for expected interrupting questions:
 
-1. *C'est safe avec notre code privé ?* (data / privacy posture)
-2. *Ça marche avec IntelliJ / VS Code ?* (IDE integrations — Claude Code extensions exist)
-3. *On peut le brancher sur Jira / Confluence ?* (MCP framing, one-sentence answer)
-4. *Et GitHub Copilot, on garde ou on jette ?* (positioning — they're complementary, different shapes)
+1. _C'est safe avec notre code privé ?_ (data / privacy posture)
+2. _Ça marche avec IntelliJ / VS Code ?_ (IDE integrations — Claude Code extensions exist)
+3. _On peut le brancher sur Jira / Confluence ?_ (MCP framing, one-sentence answer)
+4. _Et GitHub Copilot, on garde ou on jette ?_ (positioning — they're complementary, different shapes)
 
 ## 4. Visual style — "Anthropic-inspired"
 
@@ -101,14 +101,14 @@ Rationale: warm, premium, editorial — signals "thoughtful talk" and echoes the
 
 Six slide layout components, with slide content as a typed array in `slides.data.ts`.
 
-| Layout component | Use case |
-|---|---|
-| `TitleSlide` | Act openers ("Bien prompter") |
-| `ContentSlide` | Headline + 2–4 bullets |
-| `PrincipleSlide` | Headline + ❌/✅ before-after example |
-| `CodeSlide` | Horizontally-centered, max-width-constrained code block with caption below |
-| `DemoCueSlide` | Minimal marker ("→ Démo live") to cue the speaker to switch to terminal |
-| `FaqSlide` | Question headline + concise answer |
+| Layout component | Use case                                                                   |
+| ---------------- | -------------------------------------------------------------------------- |
+| `TitleSlide`     | Act openers ("Bien prompter")                                              |
+| `ContentSlide`   | Headline + 2–4 bullets                                                     |
+| `PrincipleSlide` | Headline + ❌/✅ before-after example                                      |
+| `CodeSlide`      | Horizontally-centered, max-width-constrained code block with caption below |
+| `DemoCueSlide`   | Minimal marker ("→ Démo live") to cue the speaker to switch to terminal    |
+| `FaqSlide`       | Question headline + concise answer                                         |
 
 Adding a slide = 3 lines in `slides.data.ts`, no component scaffolding.
 
@@ -148,11 +148,21 @@ export class DeckService {
   readonly fullscreen = signal(false);
   readonly faqMode = signal(false);
 
-  next(): void { /* bounded increment */ }
-  prev(): void { /* bounded decrement */ }
-  goTo(i: number): void { /* bounded set */ }
-  toggleFullscreen(): void { /* requestFullscreen / exitFullscreen */ }
-  jumpToFaq(index: number): void { /* go to FAQ slide by index */ }
+  next(): void {
+    /* bounded increment */
+  }
+  prev(): void {
+    /* bounded decrement */
+  }
+  goTo(i: number): void {
+    /* bounded set */
+  }
+  toggleFullscreen(): void {
+    /* requestFullscreen / exitFullscreen */
+  }
+  jumpToFaq(index: number): void {
+    /* go to FAQ slide by index */
+  }
 }
 ```
 
@@ -162,15 +172,15 @@ Single parameterized route `/slide/:index` (0-based). Deep-linkable. Refresh sta
 
 ### Keyboard map
 
-| Key | Action |
-|---|---|
-| `→` / `Space` / `PageDown` | Next slide |
-| `←` / `PageUp` | Previous slide |
-| `Home` / `End` | First / last content slide |
-| `F` | Toggle fullscreen |
-| `?` | Overlay with shortcut reference |
-| `Q` then `1`–`4` | Jump to FAQ slide |
-| `Esc` | Exit fullscreen / close overlay |
+| Key                        | Action                          |
+| -------------------------- | ------------------------------- |
+| `→` / `Space` / `PageDown` | Next slide                      |
+| `←` / `PageUp`             | Previous slide                  |
+| `Home` / `End`             | First / last content slide      |
+| `F`                        | Toggle fullscreen               |
+| `?`                        | Overlay with shortcut reference |
+| `Q` then `1`–`4`           | Jump to FAQ slide               |
+| `Esc`                      | Exit fullscreen / close overlay |
 
 Presenter mode is explicitly out of scope (see §8).
 
@@ -220,6 +230,7 @@ The method mutates the existing mission object in place instead of returning a n
 **Failing test:** `'toggleComplete should flip the completed flag on the matching mission'` fails with a misleading message — the assertion is on the signal-returned array identity, not the field value, so the error message doesn't obviously point at immutability.
 
 **Why engineered this way:**
+
 - Plausible-but-wrong naïve fix: flip the boolean in place "harder." Tests still fail. This is **the honest moment** the talk requires.
 - Correct fix with `CLAUDE.md` context loaded: Claude reads the "no mutation" convention and uses `.map()` to return a new array with a new object.
 - Real-world Angular gotcha — lands with a senior Angular audience.
@@ -273,12 +284,12 @@ Explicitly **not** building:
 
 ## 9. Risks & mitigations
 
-| Risk | Mitigation |
-|---|---|
-| Live demo fails on stage (network, Claude down, unexpected prompt failure) | Pre-record a fallback asciinema of the same demo; keep it one keypress away from the current slide. Decide day-of whether to go live or recorded. |
-| 40-min slot overruns because of Q&A | Content is paced to 30 min. FAQ appendix slides answer the common questions in ~30 sec each so speaker can short-circuit discussion when time is tight. |
-| `CLAUDE.md` convention about "no mutation" doesn't fire — Claude's fix is still wrong | Test the scenario end-to-end *before* the talk with the exact seeded `CLAUDE.md`. If it's flaky, strengthen the convention wording. |
-| Audience sees immutability bug as "Angular trivia" rather than a prompting lesson | Speaker explicitly narrates: *"voyez comment la convention dans `CLAUDE.md` a guidé Claude vers la bonne solution."* Lesson is named, not left implicit. |
+| Risk                                                                                  | Mitigation                                                                                                                                               |
+| ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Live demo fails on stage (network, Claude down, unexpected prompt failure)            | Pre-record a fallback asciinema of the same demo; keep it one keypress away from the current slide. Decide day-of whether to go live or recorded.        |
+| 40-min slot overruns because of Q&A                                                   | Content is paced to 30 min. FAQ appendix slides answer the common questions in ~30 sec each so speaker can short-circuit discussion when time is tight.  |
+| `CLAUDE.md` convention about "no mutation" doesn't fire — Claude's fix is still wrong | Test the scenario end-to-end _before_ the talk with the exact seeded `CLAUDE.md`. If it's flaky, strengthen the convention wording.                      |
+| Audience sees immutability bug as "Angular trivia" rather than a prompting lesson     | Speaker explicitly narrates: _"voyez comment la convention dans `CLAUDE.md` a guidé Claude vers la bonne solution."_ Lesson is named, not left implicit. |
 
 ## 10. Deliverables checklist
 

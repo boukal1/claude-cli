@@ -1,12 +1,16 @@
 {
   "printWidth": 100,
   "singleQuote": true,
+  "trailingComma": "all",
+  "semi": true,
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "htmlWhitespaceSensitivity": "strict",
+  "endOfLine": "lf",
   "overrides": [
     {
       "files": "*.html",
-      "options": {
-        "parser": "angular"
-      }
+      "options": { "parser": "angular" }
     }
   ]
 }

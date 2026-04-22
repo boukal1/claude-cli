@@ -1,0 +1,13 @@
+# Force LF line endings on checkout across platforms.
+# Avoids CRLF/LF churn that would otherwise break `prettier --check` on CI
+# when developers work from both Windows and macOS/Linux.
+* text=auto eol=lf
+
+# Keep binary assets untouched.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
