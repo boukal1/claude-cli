@@ -477,7 +477,7 @@ git commit -m "feat(seed): MissionService.toggleComplete mutates in place (demo 
 - Modify: `src/app/app.scss`
 - Modify: `src/app/app.spec.ts`
 
-> **Angular 21 note:** the root component class is `App` (not `AppComponent`) and its files are `app.ts`, `app.html`, `app.scss`, `app.spec.ts`. Standalone is default — no `standalone: true` flag needed.
+> **Angular 21 note:** the root component class is `App` (not the pre-v21 `App` name) and its files drop the `.component` suffix — `app.ts`, `app.html`, `app.scss`, `app.spec.ts`. Standalone is default — no `standalone: true` flag needed.
 
 - [ ] **Step 1: Update `app.ts`**
 
@@ -757,7 +757,7 @@ Petit traqueur de missions — utilisé comme repo de démo pendant la présenta
 Ce repo contient **un bug volontaire** et **une fonctionnalité en TODO**, engineered pour la démo live :
 
 - Le bouton "Marquer terminée" dans l'UI ne met rien à jour visuellement. Le test unitaire correspondant échoue.
-- Un filtre par statut (toutes / actives / terminées) reste à implémenter — voir le `<!-- TODO -->` dans `src/app/app.component.html`.
+- Un filtre par statut (toutes / actives / terminées) reste à implémenter — voir le `<!-- TODO -->` dans `src/app/app.html`.
 
 Les conventions du projet sont dans [`CLAUDE.md`](./CLAUDE.md) — Claude Code les lit automatiquement en début de session.
 
@@ -1568,15 +1568,15 @@ export const routes: Routes = [
 ];
 ```
 
-- [ ] **Step 3: Point `app.component.html` at the router outlet**
+- [ ] **Step 3: Point `app.html` at the router outlet**
 
-Replace `src/app/app.component.html` with:
+Replace `src/app/app.html` with:
 
 ```html
 <router-outlet />
 ```
 
-Ensure `src/app/app.component.ts` imports `RouterOutlet`:
+Ensure `src/app/app.ts` imports `RouterOutlet`:
 
 ```ts
 import { ChangeDetectionStrategy, Component } from '@angular/core';
@@ -1586,31 +1586,31 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet],
-  templateUrl: './app.component.html',
+  templateUrl: './app.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {}
+export class App {}
 ```
 
-Update `src/app/app.component.spec.ts` accordingly — remove any content checks that depended on the scaffolded template; keep a minimal compilation test:
+Update `src/app/app.spec.ts` accordingly — remove any content checks that depended on the scaffolded template; keep a minimal compilation test:
 
 ```ts
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { AppComponent } from './app.component';
+import { App } from './app';
 import { DECK_SLIDES } from './deck/deck.service';
 import { SLIDES } from './deck/slides.data';
 
-describe('AppComponent', () => {
+describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [App],
       providers: [provideRouter([]), { provide: DECK_SLIDES, useValue: SLIDES }],
     }).compileComponents();
   });
 
   it('should create', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(App);
     expect(fixture.componentInstance).toBeTruthy();
   });
 });
@@ -1632,15 +1632,15 @@ git add -A
 git commit -m "feat: route-driven SlideHostComponent syncing with DeckService"
 ```
 
-### Task 3.5: Keyboard navigation on `AppComponent`
+### Task 3.5: Keyboard navigation on `App`
 
 **Files:**
 
-- Modify: `src/app/app.component.ts`
+- Modify: `src/app/app.ts`
 
 - [ ] **Step 1: Add a `@HostListener` for key navigation**
 
-Replace `src/app/app.component.ts`:
+Replace `src/app/app.ts`:
 
 ```ts
 import { ChangeDetectionStrategy, Component, HostListener, inject, signal } from '@angular/core';
@@ -1654,10 +1654,10 @@ import { DeckService } from './deck/deck.service';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet],
-  templateUrl: './app.component.html',
+  templateUrl: './app.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
+export class App {
   private readonly deck = inject(DeckService);
 
   /** Whether the shortcut-reference overlay is currently visible. */
@@ -1758,7 +1758,7 @@ Press `→`, `←`, `Home`, `End`, `Q` then `1`, `F`. Confirm URL changes, place
 - [ ] **Step 3: Commit**
 
 ```bash
-git add src/app/app.component.ts
+git add src/app/app.ts
 git commit -m "feat: keyboard navigation and shortcut overlay trigger"
 ```
 
@@ -1769,7 +1769,7 @@ git commit -m "feat: keyboard navigation and shortcut overlay trigger"
 - Create: `src/app/shared/progress-bar.component.ts`
 - Create: `src/app/shared/key-hint.component.ts`
 - Create: `src/app/shared/shortcuts-overlay.component.ts`
-- Modify: `src/app/app.component.ts` + `app.component.html`
+- Modify: `src/app/app.ts` + `app.html`
 
 - [ ] **Step 1: `progress-bar.component.ts`**
 
@@ -1928,9 +1928,9 @@ export class ShortcutsOverlayComponent {
 }
 ```
 
-- [ ] **Step 4: Mount the three components on `AppComponent`**
+- [ ] **Step 4: Mount the three components on `App`**
 
-Update `src/app/app.component.ts` imports:
+Update `src/app/app.ts` imports:
 
 ```ts
 import { RouterOutlet } from '@angular/router';
@@ -1942,12 +1942,12 @@ import { ShortcutsOverlayComponent } from './shared/shortcuts-overlay.component'
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, ProgressBarComponent, KeyHintComponent, ShortcutsOverlayComponent],
-  templateUrl: './app.component.html',
+  templateUrl: './app.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 ```
 
-Update `src/app/app.component.html`:
+Update `src/app/app.html`:
 
 ```html
 <app-progress-bar />
