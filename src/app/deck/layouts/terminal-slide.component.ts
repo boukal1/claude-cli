@@ -60,7 +60,7 @@ import { TerminalSlideConfig } from '../slide-config';
     `
       .label {
         font-family: var(--font-sans);
-        font-size: 0.7rem;
+        font-size: 0.85rem;
         text-transform: uppercase;
         letter-spacing: 0.22em;
         color: var(--color-muted);
@@ -69,7 +69,7 @@ import { TerminalSlideConfig } from '../slide-config';
       }
       .title {
         font-family: var(--font-display);
-        font-size: clamp(1.75rem, 3vw, 2.5rem);
+        font-size: clamp(2.25rem, 3.75vw, 3rem);
         font-weight: 500;
         letter-spacing: -0.015em;
         margin: 0 0 1.5rem 0;
@@ -111,7 +111,7 @@ import { TerminalSlideConfig } from '../slide-config';
       .title-bar-label {
         margin-left: 0.25rem;
         font-family: var(--font-sans);
-        font-size: 0.78rem;
+        font-size: 0.95rem;
         color: rgba(255, 255, 255, 0.78);
         letter-spacing: 0.01em;
       }
@@ -119,7 +119,7 @@ import { TerminalSlideConfig } from '../slide-config';
         background: #0c0c0c;
         padding: 1.5rem 1.75rem;
         font-family: var(--font-mono);
-        font-size: clamp(0.82rem, 1vw, 0.95rem);
+        font-size: clamp(1rem, 1.2vw, 1.15rem);
         line-height: 1.55;
         color: #e6e6e6;
         min-height: 16rem;
@@ -158,7 +158,7 @@ import { TerminalSlideConfig } from '../slide-config';
       .welcome-body {
         margin-top: 0.55rem;
         color: rgba(230, 230, 230, 0.75);
-        font-size: 0.82rem;
+        font-size: 0.95rem;
       }
       .cwd-line {
         margin-top: 0.35rem;
@@ -193,7 +193,7 @@ import { TerminalSlideConfig } from '../slide-config';
         margin-top: 1rem;
         font-family: var(--font-sans);
         color: var(--color-muted);
-        font-size: 0.95rem;
+        font-size: 1.1rem;
         max-width: 52rem;
       }
     `,

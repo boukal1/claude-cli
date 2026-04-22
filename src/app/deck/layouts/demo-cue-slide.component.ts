@@ -31,7 +31,7 @@ import { DemoCueSlideConfig } from '../slide-config';
         margin-top: 2.5rem;
         font-family: var(--font-sans);
         color: var(--color-muted);
-        font-size: 1rem;
+        font-size: 1.2rem;
         max-width: 40ch;
       }
     `,

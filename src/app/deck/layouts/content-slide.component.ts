@@ -26,7 +26,7 @@ import { ContentSlideConfig } from '../slide-config';
     `
       .label {
         font-family: var(--font-sans);
-        font-size: 0.7rem;
+        font-size: 0.85rem;
         text-transform: uppercase;
         letter-spacing: 0.22em;
         color: var(--color-muted);
@@ -35,7 +35,7 @@ import { ContentSlideConfig } from '../slide-config';
       }
       .title {
         font-family: var(--font-display);
-        font-size: clamp(2rem, 4vw, 3rem);
+        font-size: clamp(2.5rem, 4.75vw, 3.5rem);
         font-weight: 500;
         letter-spacing: -0.015em;
         line-height: 1.1;
@@ -49,7 +49,7 @@ import { ContentSlideConfig } from '../slide-config';
         flex-direction: column;
         gap: 1rem;
         font-family: var(--font-sans);
-        font-size: clamp(1rem, 1.5vw, 1.25rem);
+        font-size: clamp(1.2rem, 1.75vw, 1.5rem);
         line-height: 1.5;
       }
       .bullets li {

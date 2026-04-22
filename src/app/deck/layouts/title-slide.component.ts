@@ -24,7 +24,7 @@ import { TitleSlideConfig } from '../slide-config';
     `
       .label {
         font-family: var(--font-sans);
-        font-size: 0.7rem;
+        font-size: 0.85rem;
         text-transform: uppercase;
         letter-spacing: 0.22em;
         color: var(--color-muted);
@@ -34,7 +34,7 @@ import { TitleSlideConfig } from '../slide-config';
       .title {
         font-family: var(--font-display);
         font-weight: 500;
-        font-size: clamp(3rem, 7vw, 5.5rem);
+        font-size: clamp(3.5rem, 8vw, 6.5rem);
         line-height: 1.05;
         letter-spacing: -0.02em;
         color: var(--color-ink);
@@ -42,7 +42,7 @@ import { TitleSlideConfig } from '../slide-config';
       }
       .subtitle {
         font-family: var(--font-sans);
-        font-size: clamp(1.125rem, 1.75vw, 1.5rem);
+        font-size: clamp(1.375rem, 2vw, 1.75rem);
         color: var(--color-muted);
         margin-top: 1.5rem;
         max-width: 48ch;

@@ -27,7 +27,7 @@ import { CodeSlideConfig } from '../slide-config';
     `
       .label {
         font-family: var(--font-sans);
-        font-size: 0.7rem;
+        font-size: 0.85rem;
         text-transform: uppercase;
         letter-spacing: 0.22em;
         color: var(--color-muted);
@@ -36,7 +36,7 @@ import { CodeSlideConfig } from '../slide-config';
       }
       .title {
         font-family: var(--font-display);
-        font-size: clamp(1.75rem, 3vw, 2.5rem);
+        font-size: clamp(2.25rem, 3.75vw, 3rem);
         font-weight: 500;
         letter-spacing: -0.015em;
         margin: 0 0 1.5rem 0;
@@ -47,7 +47,7 @@ import { CodeSlideConfig } from '../slide-config';
         padding: 1.25rem 1.5rem;
         border-radius: 10px;
         font-family: var(--font-mono);
-        font-size: clamp(0.8rem, 1vw, 0.95rem);
+        font-size: clamp(1rem, 1.2vw, 1.15rem);
         line-height: 1.55;
         overflow-x: auto;
         max-width: 72ch;
@@ -56,7 +56,7 @@ import { CodeSlideConfig } from '../slide-config';
         margin-top: 1rem;
         font-family: var(--font-sans);
         color: var(--color-muted);
-        font-size: 0.95rem;
+        font-size: 1.1rem;
         max-width: 72ch;
       }
     `,

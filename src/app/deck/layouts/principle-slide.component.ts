@@ -45,7 +45,7 @@ import { PrincipleSlideConfig } from '../slide-config';
     `
       .label {
         font-family: var(--font-sans);
-        font-size: 0.7rem;
+        font-size: 0.85rem;
         text-transform: uppercase;
         letter-spacing: 0.22em;
         color: var(--color-muted);
@@ -54,7 +54,7 @@ import { PrincipleSlideConfig } from '../slide-config';
       }
       .title {
         font-family: var(--font-display);
-        font-size: clamp(2rem, 4vw, 3rem);
+        font-size: clamp(2.5rem, 4.75vw, 3.5rem);
         font-weight: 500;
         letter-spacing: -0.015em;
         line-height: 1.1;
@@ -71,7 +71,7 @@ import { PrincipleSlideConfig } from '../slide-config';
         align-items: baseline;
         padding: 0.9rem 1.1rem;
         font-family: var(--font-sans);
-        font-size: clamp(0.95rem, 1.35vw, 1.1rem);
+        font-size: clamp(1.15rem, 1.6vw, 1.35rem);
         line-height: 1.5;
       }
       .example.bad {
@@ -94,9 +94,9 @@ import { PrincipleSlideConfig } from '../slide-config';
         margin-top: 1.5rem;
         background: #0c0c0c;
         border-radius: 8px;
-        padding: 0.9rem 1.2rem;
+        padding: 1rem 1.3rem;
         font-family: var(--font-mono);
-        font-size: clamp(0.75rem, 0.92vw, 0.88rem);
+        font-size: clamp(0.9rem, 1.1vw, 1.05rem);
         line-height: 1.55;
         color: rgba(230, 230, 230, 0.85);
         max-width: 56rem;
@@ -124,6 +124,7 @@ import { PrincipleSlideConfig } from '../slide-config';
         margin-top: 1.5rem;
         font-family: var(--font-sans);
         font-style: italic;
+        font-size: clamp(1rem, 1.25vw, 1.2rem);
         color: var(--color-muted);
         max-width: 58ch;
       }

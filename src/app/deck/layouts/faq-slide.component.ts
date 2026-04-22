@@ -20,7 +20,7 @@ import { FaqSlideConfig } from '../slide-config';
     `
       .label {
         font-family: var(--font-sans);
-        font-size: 0.7rem;
+        font-size: 0.85rem;
         text-transform: uppercase;
         letter-spacing: 0.22em;
         color: var(--color-coral);
@@ -30,14 +30,14 @@ import { FaqSlideConfig } from '../slide-config';
       .question {
         font-family: var(--font-display);
         font-weight: 500;
-        font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+        font-size: clamp(2.25rem, 4vw, 3.25rem);
         line-height: 1.15;
         letter-spacing: -0.015em;
         margin: 0 0 1.75rem 0;
       }
       .answer {
         font-family: var(--font-sans);
-        font-size: clamp(1rem, 1.4vw, 1.2rem);
+        font-size: clamp(1.2rem, 1.65vw, 1.4rem);
         line-height: 1.55;
         max-width: 58ch;
         color: var(--color-ink);
