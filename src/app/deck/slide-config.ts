@@ -38,6 +38,8 @@ export interface TitleSlideConfig extends BaseSlide {
   readonly title: string;
   /** Optional subtitle below the title. */
   readonly subtitle?: string;
+  /** When true, render the Claude sparkle logo above the label — reserved for the opening slide. */
+  readonly logo?: boolean;
 }
 
 /**

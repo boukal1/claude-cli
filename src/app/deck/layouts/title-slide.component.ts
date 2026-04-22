@@ -14,7 +14,12 @@ import { TitleSlideConfig } from '../slide-config';
       @if (slide().label) {
         <div class="label">{{ slide().label }}</div>
       }
-      <h1 class="title">{{ slide().title }}</h1>
+      <div class="headline">
+        @if (slide().logo) {
+          <img class="logo" src="claude-logo.svg" alt="" aria-hidden="true" />
+        }
+        <h1 class="title">{{ slide().title }}</h1>
+      </div>
       @if (slide().subtitle) {
         <p class="subtitle">{{ slide().subtitle }}</p>
       }
@@ -22,6 +27,17 @@ import { TitleSlideConfig } from '../slide-config';
   `,
   styles: [
     `
+      .headline {
+        display: flex;
+        align-items: center;
+        gap: clamp(1rem, 1.75vw, 1.75rem);
+      }
+      .logo {
+        width: clamp(3rem, 5.5vw, 4.75rem);
+        height: clamp(3rem, 5.5vw, 4.75rem);
+        flex-shrink: 0;
+        display: block;
+      }
       .label {
         font-family: var(--font-sans);
         font-size: 0.85rem;

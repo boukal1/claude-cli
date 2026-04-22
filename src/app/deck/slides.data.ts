@@ -13,6 +13,7 @@ export const SLIDES: readonly SlideConfig[] = [
     label: 'Act 1 · Le hook',
     title: 'Claude Code',
     subtitle: 'Ce collègue qui vit dans votre repo.',
+    logo: true,
   },
   {
     kind: 'principle',
