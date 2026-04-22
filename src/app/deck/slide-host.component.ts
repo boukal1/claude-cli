@@ -2,35 +2,56 @@ import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@a
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { DeckService } from './deck.service';
+import {
+  CodeSlideConfig,
+  ContentSlideConfig,
+  DemoCueSlideConfig,
+  FaqSlideConfig,
+  PrincipleSlideConfig,
+  TitleSlideConfig,
+} from './slide-config';
+import { TitleSlideComponent } from './layouts/title-slide.component';
+import { ContentSlideComponent } from './layouts/content-slide.component';
+import { PrincipleSlideComponent } from './layouts/principle-slide.component';
+import { CodeSlideComponent } from './layouts/code-slide.component';
+import { DemoCueSlideComponent } from './layouts/demo-cue-slide.component';
+import { FaqSlideComponent } from './layouts/faq-slide.component';
 
 /**
  * Route-bound host. Reads the `:index` route parameter, keeps `DeckService` in
- * sync, and renders a placeholder for the current slide (layout components are
- * wired in Phase 4).
+ * sync, and renders the layout component matching the current slide's `kind`.
  */
 @Component({
   selector: 'app-slide-host',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TitleSlideComponent,
+    ContentSlideComponent,
+    PrincipleSlideComponent,
+    CodeSlideComponent,
+    DemoCueSlideComponent,
+    FaqSlideComponent,
+  ],
   template: `
     @switch (slide()?.kind) {
       @case ('title') {
-        <p>TODO: TitleSlide — Task 4.1</p>
+        <app-title-slide [slide]="asTitle(slide())" />
       }
       @case ('content') {
-        <p>TODO: ContentSlide — Task 4.2</p>
+        <app-content-slide [slide]="asContent(slide())" />
       }
       @case ('principle') {
-        <p>TODO: PrincipleSlide — Task 4.3</p>
+        <app-principle-slide [slide]="asPrinciple(slide())" />
       }
       @case ('code') {
-        <p>TODO: CodeSlide — Task 4.4</p>
+        <app-code-slide [slide]="asCode(slide())" />
       }
       @case ('demo-cue') {
-        <p>TODO: DemoCueSlide — Task 4.5</p>
+        <app-demo-cue-slide [slide]="asDemoCue(slide())" />
       }
       @case ('faq') {
-        <p>TODO: FaqSlide — Task 4.6</p>
+        <app-faq-slide [slide]="asFaq(slide())" />
       }
     }
   `,
@@ -38,7 +59,6 @@ import { DeckService } from './deck.service';
     `
       :host {
         display: block;
-        padding: 4rem;
       }
     `,
   ],
@@ -54,7 +74,6 @@ export class SlideHostComponent {
   readonly slide = computed(() => this.deck.current());
 
   constructor() {
-    // Route → service
     effect(() => {
       const params = this.routeIndex();
       if (!params) {
@@ -67,7 +86,6 @@ export class SlideHostComponent {
       }
     });
 
-    // Service → route (keep URL in sync with currentIndex)
     effect(() => {
       const i = this.deck.currentIndex();
       const current = this.route.snapshot.paramMap.get('index');
@@ -75,5 +93,29 @@ export class SlideHostComponent {
         this.router.navigate(['/slide', i], { replaceUrl: false });
       }
     });
+  }
+
+  /**
+   * Narrowing helpers — the `@switch` already verifies `slide.kind`, but
+   * TypeScript can't propagate that guard into the `[slide]` binding. These
+   * casts let the templates pass a strongly-typed config to each layout.
+   */
+  asTitle(s: ReturnType<typeof this.slide>): TitleSlideConfig {
+    return s as TitleSlideConfig;
+  }
+  asContent(s: ReturnType<typeof this.slide>): ContentSlideConfig {
+    return s as ContentSlideConfig;
+  }
+  asPrinciple(s: ReturnType<typeof this.slide>): PrincipleSlideConfig {
+    return s as PrincipleSlideConfig;
+  }
+  asCode(s: ReturnType<typeof this.slide>): CodeSlideConfig {
+    return s as CodeSlideConfig;
+  }
+  asDemoCue(s: ReturnType<typeof this.slide>): DemoCueSlideConfig {
+    return s as DemoCueSlideConfig;
+  }
+  asFaq(s: ReturnType<typeof this.slide>): FaqSlideConfig {
+    return s as FaqSlideConfig;
   }
 }
