@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, HostListener, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { DeckService } from './deck/deck.service';
+import { ProgressBarComponent } from './shared/progress-bar.component';
+import { KeyHintComponent } from './shared/key-hint.component';
+import { ShortcutsOverlayComponent } from './shared/shortcuts-overlay.component';
 
 /**
  * Root component — owns global keyboard shortcuts and hosts the router outlet.
@@ -8,7 +11,7 @@ import { DeckService } from './deck/deck.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ProgressBarComponent, KeyHintComponent, ShortcutsOverlayComponent],
   templateUrl: './app.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

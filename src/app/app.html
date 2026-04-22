@@ -1,1 +1,4 @@
+<app-progress-bar />
 <router-outlet />
+<app-key-hint />
+<app-shortcuts-overlay [visible]="showShortcuts()" (dismissed)="showShortcuts.set(false)" />
