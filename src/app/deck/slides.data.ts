@@ -178,6 +178,18 @@ irm https://claude.ai/install.ps1 | iex
     title: '@fichier.ts — le contexte.',
     bad: "Explique moi comment fonctionne l'authentification.",
     good: 'Explique-moi @auth.service.ts et @auth.guard.ts, leur rôle respectif.',
+    demo: {
+      command: 'Explique-moi @auth.service.ts et @auth.guard.ts…',
+      output: [
+        'Reading auth.service.ts (142 lines)…',
+        'Reading auth.guard.ts (38 lines)…',
+        '',
+        'auth.service.ts : wrapper autour du JWT, login/logout',
+        "  et état via un signal currentUser.",
+        'auth.guard.ts  : CanMatch qui redirige vers /login',
+        '  quand currentUser() est null.',
+      ],
+    },
     takeaway:
       'Claude lit exactement les fichiers que vous nommez — pas de devinette. Un chemin complet pasté fonctionne aussi (voir FAQ).',
   },
@@ -187,6 +199,17 @@ irm https://claude.ai/install.ps1 | iex
     title: '# — la mémoire projet.',
     bad: 'Re-rappeler les conventions à chaque nouvelle conversation.',
     good: '# Toujours utiliser RxJS. Jamais de Promise. → écrit dans CLAUDE.md.',
+    demo: {
+      command: '# Toujours utiliser RxJS. Jamais de Promise.',
+      output: [
+        'Save to :',
+        '  ▸ ./CLAUDE.md           (project)',
+        '    ~/.claude/CLAUDE.md   (user)',
+        '    ../CLAUDE.md          (parent)',
+        '',
+        '✓ Saved to ./CLAUDE.md',
+      ],
+    },
     takeaway:
       'CLAUDE.md est chargé automatiquement. Une fois pour toutes. Dire « retiens ça » marche aussi (voir FAQ).',
   },
