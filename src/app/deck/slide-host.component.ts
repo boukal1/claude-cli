@@ -37,7 +37,7 @@ import { FaqSlideComponent } from './layouts/faq-slide.component';
     FaqSlideComponent,
   ],
   template: `
-    @switch (slide()?.kind) {
+    @switch (slide().kind) {
       @case ('title') {
         <app-title-slide [slide]="asTitle(slide())" />
       }
