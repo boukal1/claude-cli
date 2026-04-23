@@ -80,6 +80,7 @@ export const SLIDES: readonly SlideConfig[] = [
       '/clear → repartir sur un contexte propre',
       '/compact → condenser la conversation sans tout perdre',
       '/usage → voir votre quota et le modèle actif',
+      '/model → choisir Opus / Sonnet / Haiku selon la tâche',
       '@fichier.ts → pointer Claude sur un fichier précis',
       '# → sauvegarder une note dans CLAUDE.md',
     ],
@@ -200,6 +201,28 @@ export const SLIDES: readonly SlideConfig[] = [
       ],
     },
     takeaway: "Sur Pro ou Max, savoir où vous en êtes avant d'attaquer la grosse session.",
+  },
+  {
+    kind: 'principle',
+    label: 'Essentiel',
+    title: '/model — changer de modèle.',
+    bad: 'Quota Opus épuisé en pleine session — tout s’arrête jusqu’au prochain reset.',
+    good: '/model → basculer vers Sonnet ou Haiku pour continuer, revenir à Opus pour la réflexion lourde.',
+    demo: {
+      command: '/model',
+      output: [
+        'Current : claude-opus-4-7',
+        '',
+        'Select model :',
+        '  ▸ Opus 4.7     — réflexion lourde, plan mode',
+        '  · Sonnet 4.6   — travail quotidien, rapide',
+        '  · Haiku 4.5    — edits simples, très rapide',
+        '',
+        '✓ Switched to Sonnet 4.6',
+      ],
+    },
+    takeaway:
+      'Opus pour planifier et raisonner. Sonnet pour le reste. Haiku quand il faut aller vite.',
   },
   {
     kind: 'principle',
