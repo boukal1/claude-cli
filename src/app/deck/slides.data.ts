@@ -74,6 +74,7 @@ export const SLIDES: readonly SlideConfig[] = [
     label: 'Les essentiels',
     title: "Les plus essentiels — aucun autre pour l'instant.",
     bullets: [
+      'ESC → interrompre Claude en cours de route',
       '/init → poser un premier CLAUDE.md',
       '/plan (ou Shift+Tab) → plan mode — le plus gros unlock',
       '/clear → repartir sur un contexte propre',
@@ -82,6 +83,28 @@ export const SLIDES: readonly SlideConfig[] = [
       '@fichier.ts → pointer Claude sur un fichier précis',
       '# → sauvegarder une note dans CLAUDE.md',
     ],
+  },
+  {
+    kind: 'principle',
+    label: 'Essentiel',
+    title: 'ESC — le bouton d’arrêt.',
+    bad: 'Claude part dans la mauvaise direction — vous attendez qu’il finisse pour recommencer.',
+    good: 'ESC stoppe net. ESC ESC remonte à un prompt précédent pour repartir proprement.',
+    demo: {
+      command: 'Refactor toute l’app pour passer en RxJS…',
+      output: [
+        'Reading 47 files…',
+        '  ✓ auth.service.ts',
+        '  ✓ user.service.ts',
+        '  Editing app.component.ts…',
+        '',
+        '[ESC]',
+        '',
+        '⏹  Interrupted. Tapez pour reprendre, ou ESC ESC pour revenir en arrière.',
+      ],
+    },
+    takeaway:
+      'Avant toute écriture ou commande shell, Claude demande la permission. Vous gardez la main à tout moment.',
   },
   {
     kind: 'principle',
@@ -239,7 +262,7 @@ export const SLIDES: readonly SlideConfig[] = [
   },
   {
     kind: 'principle',
-    label: 'Bien prompter · 1/4',
+    label: 'Bien prompter · 1/5',
     title: 'Un objectif, pas une tâche.',
     bad: 'Fix the login bug.',
     good: "@LoginComponent connecte l'utilisateur mais n'enregistre pas son rôle dans AuthService. Trouve pourquoi et ajoute un test unitaire.",
@@ -247,7 +270,7 @@ export const SLIDES: readonly SlideConfig[] = [
   },
   {
     kind: 'principle',
-    label: 'Bien prompter · 2/4',
+    label: 'Bien prompter · 2/5',
     title: 'Contexte, pas solution.',
     bad: 'Ajoute un Map<String, List<User>> ici.',
     good: '@UserService doit grouper les users par département. Utilise le style de @OrderService.groupByCustomer.',
@@ -255,7 +278,7 @@ export const SLIDES: readonly SlideConfig[] = [
   },
   {
     kind: 'principle',
-    label: 'Bien prompter · 3/4',
+    label: 'Bien prompter · 3/5',
     title: 'Plan mode pour tout ce qui est non-trivial.',
     bad: "Refactor la couche d'accès base de données. (Claude attaque directement.)",
     good: "/plan → Refactor la couche d'accès base de données. (Claude propose, vous approuvez.)",
@@ -263,11 +286,20 @@ export const SLIDES: readonly SlideConfig[] = [
   },
   {
     kind: 'principle',
-    label: 'Bien prompter · 4/4',
+    label: 'Bien prompter · 4/5',
     title: 'Vérifier avant de faire confiance.',
     bad: "Claude dit « c'est fait, les tests passent ». Vous merge.",
     good: "Claude dit « c'est fait, les tests passent ». Vous lancez les tests vous-même.",
     takeaway: 'Excellent junior, pas oracle.',
+  },
+  {
+    kind: 'principle',
+    label: 'Bien prompter · 5/5',
+    title: 'Commit avant la grosse session.',
+    bad: '2h de refactor, quelques changements qui cassent — « comment je reviens en arrière ? »',
+    good: 'git commit avant d’attaquer. Si ça dérape, git reset vous sauve.',
+    takeaway:
+      'Claude est un excellent coéquipier. Git est votre filet de sécurité — jamais l’un sans l’autre.',
   },
 
   // ───────────────────────── Act 4 — Démo live
@@ -307,6 +339,13 @@ export const SLIDES: readonly SlideConfig[] = [
   },
 
   // ───────────────────────── FAQ appendix (reached via Q + digit)
+  {
+    kind: 'faq',
+    group: 'faq',
+    question: 'Quel plan faut-il pour l’utiliser ?',
+    answer:
+      'Claude Code est inclus dans les plans Pro, Max, Team et Enterprise. Chez nous c’est le plan Team — tous les devs y ont accès avec un quota mutualisé. L’API existe aussi, facturée au token, pour les usages automatisés (hooks, CI, scripts).',
+  },
   {
     kind: 'faq',
     group: 'faq',
